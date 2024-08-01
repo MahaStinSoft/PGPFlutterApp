@@ -351,8 +351,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 10.0), // Added margin
+                    margin: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 32.0),
                       child: SizedBox(
@@ -376,10 +375,15 @@ class LoginPage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "English",
-                          style: AppTextStyles.defaultStyle.copyWith(
-                            color: AppColors.iconsColor,
+                        InkWell(
+                          onTap: () {
+                            // Handle English language change
+                          },
+                          child: Text(
+                            "English",
+                            style: AppTextStyles.defaultStyle.copyWith(
+                              color: AppColors.iconsColor,
+                            ),
                           ),
                         ),
                         const SizedBox(width: 16),
@@ -390,10 +394,15 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 16),
-                        Text(
-                          "Tamil",
-                          style: AppTextStyles.defaultStyle.copyWith(
-                            color: AppColors.iconsColor,
+                        InkWell(
+                          onTap: () {
+                            // Handle Tamil language change
+                          },
+                          child: Text(
+                            "தமிழ்",
+                            style: AppTextStyles.defaultStyle.copyWith(
+                              color: AppColors.iconsColor,
+                            ),
                           ),
                         ),
                       ],
