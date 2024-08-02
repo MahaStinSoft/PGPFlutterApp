@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/colors.dart';
 import 'package:flutterapp/styles.dart'; // Adjust according to your path
+import 'package:flutterapp/generated/l10n.dart';
 
 class GrievancePage extends StatelessWidget {
   @override
@@ -23,14 +24,14 @@ class GrievancePage extends StatelessWidget {
             left: 0,
             right: 0,
             child: AppBar(
-              title: Text('My Grievance'),
+              title: Text(S.of(context).myGrievance),
               backgroundColor: Colors.transparent,
               elevation: 0,
               titleTextStyle: AppTextStyles.headerStyle,
               toolbarHeight: kToolbarHeight,
               iconTheme: IconThemeData(
                 color: AppColors.textDarkColor,
-                size: 30.0, // Adjust the icon size here
+                size: 30.0,
               ),
             ),
           ),
@@ -40,7 +41,7 @@ class GrievancePage extends StatelessWidget {
               children: [
                 SizedBox(height: 20.0),
                 Text(
-                  'NO grievance to show',
+                  S.of(context).noGrievanceToShow,
                   style: AppTextStyles.defaultStyle.copyWith(
                     fontSize: 20.0,
                     color: AppColors.hintTextColor,
