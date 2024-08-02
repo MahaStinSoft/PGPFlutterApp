@@ -3,9 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterapp/colors.dart';
 import 'package:flutterapp/styles.dart';
-import 'package:flutter_localizations/flutter_localizations.dart'; // Use if generated at different path
-import 'package:flutterapp/generated/l10n.dart'; // Adjust according to actual path
-import 'package:provider/provider.dart'; // Import provider package
+import 'package:flutterapp/generated/l10n.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
