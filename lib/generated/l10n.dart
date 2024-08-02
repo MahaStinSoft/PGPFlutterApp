@@ -359,6 +359,106 @@ class S {
       args: [],
     );
   }
+
+  /// `Public Grievance Portal`
+  String get appTitle {
+    return Intl.message(
+      'Public Grievance Portal',
+      name: 'appTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submitted Grievance`
+  String get submittedGrievance {
+    return Intl.message(
+      'Submitted Grievance',
+      name: 'submittedGrievance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resolved Grievance`
+  String get resolvedGrievance {
+    return Intl.message(
+      'Resolved Grievance',
+      name: 'resolvedGrievance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Know your Municipality`
+  String get knowYourMunicipality {
+    return Intl.message(
+      'Know your Municipality',
+      name: 'knowYourMunicipality',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Grievance`
+  String get newGrievance {
+    return Intl.message(
+      'New Grievance',
+      name: 'newGrievance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registered Grievance`
+  String get registeredGrievance {
+    return Intl.message(
+      'Registered Grievance',
+      name: 'registeredGrievance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gallery`
+  String get gallery {
+    return Intl.message(
+      'Gallery',
+      name: 'gallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Videos`
+  String get videos {
+    return Intl.message(
+      'Videos',
+      name: 'videos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Grievance`
+  String get myGrievance {
+    return Intl.message(
+      'My Grievance',
+      name: 'myGrievance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `NO grievance to show`
+  String get noGrievanceToShow {
+    return Intl.message(
+      'NO grievance to show',
+      name: 'noGrievanceToShow',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

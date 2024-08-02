@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "alreadyHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("முந்தைய கணக்கொன்றா?"),
+        "appTitle": MessageLookupByLibrary.simpleMessage("பொது புகார் மையம்"),
         "confirmPassword": MessageLookupByLibrary.simpleMessage(
             "கடவுச்சொல்லை உறுதிப்படுத்தவும்"),
         "confirmPasswordHint": MessageLookupByLibrary.simpleMessage(
@@ -36,6 +37,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "english": MessageLookupByLibrary.simpleMessage("ஆங்கிலம்"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage(
             "கடவுச்சொல்லை மறந்துவிட்டீர்களா?"),
+        "gallery": MessageLookupByLibrary.simpleMessage("படக்காட்சிகள்"),
+        "knowYourMunicipality": MessageLookupByLibrary.simpleMessage(
+            "உங்கள் மாகாணத்தை தெரிந்து கொள்ளுங்கள்"),
         "login": MessageLookupByLibrary.simpleMessage("உள்நுழைய"),
         "loginGrievance": MessageLookupByLibrary.simpleMessage(
             "உங்கள் முறையீட்டை பகிர்ந்து கொள்ள உள்நுழையவும்!"),
@@ -44,6 +48,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "உங்கள் மொபைல் எண்ணை உள்ளிடவும்"),
         "mobileNumberMustStartWith6": MessageLookupByLibrary.simpleMessage(
             "மொபைல் எண் 6, 7, 8 அல்லது 9 கொண்டு தொடங்க வேண்டும்"),
+        "myGrievance": MessageLookupByLibrary.simpleMessage("என் புகார்கள்"),
+        "newGrievance": MessageLookupByLibrary.simpleMessage("புதிய புகார்"),
+        "noGrievanceToShow": MessageLookupByLibrary.simpleMessage(
+            "காண்பிக்க எந்த புகாரும் இல்லை"),
         "password": MessageLookupByLibrary.simpleMessage("கடவுச்சொல்"),
         "passwordHint": MessageLookupByLibrary.simpleMessage(
             "உங்கள் கடவுச்சொல்லை உள்ளிடவும்"),
@@ -66,9 +74,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("உங்கள் பெயரை உள்ளிடவும்"),
         "pleaseEnterYourPassword": MessageLookupByLibrary.simpleMessage(
             "உங்கள் கடவுச்சொல்லை உள்ளிடவும்"),
+        "registeredGrievance":
+            MessageLookupByLibrary.simpleMessage("பதிவு செய்யப்பட்ட புகார்"),
+        "resolvedGrievance": MessageLookupByLibrary.simpleMessage(
+            "முதற்கொண்டு தீர்க்கப்பட்ட புகார்"),
         "signIn": MessageLookupByLibrary.simpleMessage("உள்நுழைய"),
         "signUp": MessageLookupByLibrary.simpleMessage("பதிவு செய்க"),
+        "submittedGrievance":
+            MessageLookupByLibrary.simpleMessage("சமர்ப்பிக்கப்பட்ட புகார்"),
         "tamil": MessageLookupByLibrary.simpleMessage("தமிழ்"),
+        "videos": MessageLookupByLibrary.simpleMessage("வீடியோக்கள்"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("மீண்டும் வருக!"),
         "yourEmail": MessageLookupByLibrary.simpleMessage("உங்கள் மின்னஞ்சல்"),
         "yourName": MessageLookupByLibrary.simpleMessage("உங்கள் பெயர்"),

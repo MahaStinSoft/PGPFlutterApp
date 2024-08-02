@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/LocaleProvider%20.dart';
+import 'package:flutterapp/widgets/home.dart';
 import 'package:flutterapp/widgets/login.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

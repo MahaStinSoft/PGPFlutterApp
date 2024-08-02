@@ -29,5 +29,15 @@
   "passwordHint": "Enter your password",
   "confirmPassword": "Confirm Password",
   "confirmPasswordHint": "Confirm your password",
-  "alreadyHaveAnAccount": "Already have an account?"
+  "alreadyHaveAnAccount": "Already have an account?",
+  "appTitle": "Public Grievance Portal",
+  "submittedGrievance": "Submitted Grievance",
+  "resolvedGrievance": "Resolved Grievance",
+  "knowYourMunicipality": "Know your Municipality",
+  "newGrievance": "New Grievance",
+  "registeredGrievance": "Registered Grievance",
+  "gallery": "Gallery",
+  "videos": "Videos",
+  "myGrievance": "My Grievance",
+  "noGrievanceToShow": "NO grievance to show"
 }

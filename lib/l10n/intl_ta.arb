@@ -1,5 +1,4 @@
 {
-  "@@locale": "ta",
   "welcomeBack": "மீண்டும் வருக!",
   "loginGrievance": "உங்கள் முறையீட்டை பகிர்ந்து கொள்ள உள்நுழையவும்!",
   "yourEmail": "உங்கள் மின்னஞ்சல்",
@@ -30,5 +29,15 @@
   "passwordHint": "உங்கள் கடவுச்சொல்லை உள்ளிடவும்",
   "confirmPassword": "கடவுச்சொல்லை உறுதிப்படுத்தவும்",
   "confirmPasswordHint": "உங்கள் கடவுச்சொல்லை உறுதிப்படுத்தவும்",
-  "alreadyHaveAnAccount": "முந்தைய கணக்கொன்றா?"
+  "alreadyHaveAnAccount": "முந்தைய கணக்கொன்றா?",
+  "appTitle": "பொது புகார் மையம்",
+  "submittedGrievance": "சமர்ப்பிக்கப்பட்ட புகார்",
+  "resolvedGrievance": "முதற்கொண்டு தீர்க்கப்பட்ட புகார்",
+  "knowYourMunicipality": "உங்கள் மாகாணத்தை தெரிந்து கொள்ளுங்கள்",
+  "newGrievance": "புதிய புகார்",
+  "registeredGrievance": "பதிவு செய்யப்பட்ட புகார்",
+  "gallery": "படக்காட்சிகள்",
+  "videos": "வீடியோக்கள்",
+  "myGrievance": "என் புகார்கள்",
+  "noGrievanceToShow": "காண்பிக்க எந்த புகாரும் இல்லை"
 }

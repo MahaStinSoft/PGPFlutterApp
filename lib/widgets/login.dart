@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutterapp/LocaleProvider%20.dart';
 import 'package:flutterapp/colors.dart';
 import 'package:flutterapp/styles.dart';
+import 'package:flutterapp/widgets/home.dart';
 import 'package:flutterapp/widgets/signup.dart';
 import 'package:flutterapp/generated/l10n.dart';
 import 'package:provider/provider.dart';
@@ -140,7 +141,14 @@ class _LoginPageState extends State<LoginPage> {
                       child: SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomePage(),
+                              ),
+                            );
+                          },
                           child: Text(
                             S.of(context).login,
                             style: AppTextStyles.defaultStyle.copyWith(
