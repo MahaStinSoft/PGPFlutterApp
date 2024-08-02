@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/LocaleProvider%20.dart';
-import 'package:flutterapp/widgets/home.dart';
-import 'package:flutterapp/widgets/login.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutterapp/generated/l10n.dart'; // Adjust according to actual path
+import 'package:flutterapp/widgets/login.dart';
+import 'package:flutterapp/generated/l10n.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
               GlobalCupertinoLocalizations.delegate,
             ],
             debugShowCheckedModeBanner: false,
-            home: LoginPage(),
+            home: LoginPage(), // or your initial page
           );
         },
       ),
