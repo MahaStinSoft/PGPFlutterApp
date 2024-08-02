@@ -326,6 +326,7 @@ class _SignupPageState extends State<SignupPage> {
                           ).copyWith(
                             suffixIcon: IconButton(
                               icon: Icon(
+                                color: AppColors.hintTextColor,
                                 _passwordVisible
                                     ? Icons.visibility
                                     : Icons.visibility_off,
@@ -368,6 +369,7 @@ class _SignupPageState extends State<SignupPage> {
                                 : AppColors.hintTextColor,
                           ).copyWith(
                             suffixIcon: IconButton(
+                              color: AppColors.hintTextColor,
                               icon: Icon(
                                 _confirmPasswordVisible
                                     ? Icons.visibility
