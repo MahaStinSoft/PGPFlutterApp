@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
+import 'package:flutterapp/LocaleProvider%20.dart';
 import 'package:flutterapp/colors.dart';
 import 'package:flutterapp/styles.dart';
 import 'package:flutterapp/widgets/signup.dart';
+import 'package:flutterapp/generated/l10n.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -29,14 +32,14 @@ class _LoginPageState extends State<LoginPage> {
             top: 0,
             left: 0,
             right: 0,
-            height: MediaQuery.of(context).size.height * 0.45,
+            height: MediaQuery.of(context).size.height * 0.4,
             child: Image.asset(
               'assets/vector.png',
               fit: BoxFit.cover,
             ),
           ),
           Positioned(
-            top: 94,
+            top: 74,
             left: 0,
             right: 0,
             child: Center(
@@ -48,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           Positioned(
-            top: MediaQuery.of(context).size.height * 0.29 + 60 / 2,
+            top: MediaQuery.of(context).size.height * 0.28 + 36 / 2,
             left: 0,
             right: 0,
             bottom: 0,
@@ -59,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 32.0),
                     child: Text(
-                      "Welcome Back!",
+                      S.of(context).welcomeBack,
                       style: AppTextStyles.headerStyle,
                     ),
                   ),
@@ -67,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 32.0),
                     child: Text(
-                      "Login to share your grievance!",
+                      S.of(context).loginGrievance,
                       style: AppTextStyles.defaultStyle.copyWith(
                         color: AppColors.iconsColor,
                       ),
@@ -77,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 32.0),
                     child: Text(
-                      "Your Email",
+                      S.of(context).yourEmail,
                       style: AppTextStyles.titleStyle,
                     ),
                   ),
@@ -86,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                     padding: const EdgeInsets.symmetric(horizontal: 32.0),
                     child: TextField(
                       decoration: AppInputDecorations.textFieldDecoration(
-                        hintText: "example@gmail.com",
+                        hintText: S.of(context).yourEmail,
                       ),
                       style: TextStyle(fontFamily: 'Poppins'),
                     ),
@@ -95,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 32.0),
                     child: Text(
-                      "Password",
+                      S.of(context).password,
                       style: AppTextStyles.titleStyle,
                     ),
                   ),
@@ -105,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: TextField(
                       obscureText: true,
                       decoration: AppInputDecorations.textFieldDecoration(
-                        hintText: "**********",
+                        hintText: S.of(context).password,
                       ),
                       style: TextStyle(fontFamily: 'Poppins'),
                     ),
@@ -118,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: TextButton(
                         onPressed: () {},
                         child: Text(
-                          "Forgot Password?",
+                          S.of(context).forgotPassword,
                           style: AppTextStyles.defaultStyle.copyWith(
                             fontWeight: FontWeight.w600,
                             color: AppButtonStyles
@@ -139,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: ElevatedButton(
                           onPressed: () {},
                           child: Text(
-                            "Login",
+                            S.of(context).login,
                             style: AppTextStyles.defaultStyle.copyWith(
                               color: AppColors.textLightColor,
                               fontWeight: FontWeight.w600,
@@ -157,12 +160,14 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         InkWell(
                           onTap: () {
+                            Provider.of<LocaleProvider>(context, listen: false)
+                                .setLocale(Locale('en'));
                             setState(() {
                               isEnglishSelected = true;
                             });
                           },
                           child: Text(
-                            "English",
+                            S.of(context).english,
                             style: AppTextStyles.defaultStyle.copyWith(
                                 color: isEnglishSelected
                                     ? AppColors.primaryColor
@@ -180,12 +185,14 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(width: 16),
                         InkWell(
                           onTap: () {
+                            Provider.of<LocaleProvider>(context, listen: false)
+                                .setLocale(Locale('ta'));
                             setState(() {
                               isEnglishSelected = false;
                             });
                           },
                           child: Text(
-                            "தமிழ்",
+                            S.of(context).tamil,
                             style: AppTextStyles.defaultStyle.copyWith(
                                 color: !isEnglishSelected
                                     ? AppColors.primaryColor
@@ -203,12 +210,12 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.all(16.0),
                       child: RichText(
                         text: TextSpan(
-                          text: "Don’t have an account? ",
+                          text: S.of(context).dontHaveAccount,
                           style: AppTextStyles.defaultStyle
                               .copyWith(fontWeight: FontWeight.w600),
                           children: [
                             TextSpan(
-                              text: "Sign Up",
+                              text: S.of(context).signUp,
                               style: AppTextStyles.defaultStyle.copyWith(
                                 color: AppButtonStyles
                                     .elevatedButtonStyle.backgroundColor

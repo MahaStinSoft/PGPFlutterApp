@@ -3,6 +3,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterapp/colors.dart';
 import 'package:flutterapp/styles.dart';
+import 'package:flutter_localizations/flutter_localizations.dart'; // Use if generated at different path
+import 'package:flutterapp/generated/l10n.dart'; // Adjust according to actual path
+import 'package:provider/provider.dart'; // Import provider package
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -56,47 +59,47 @@ class _SignupPageState extends State<SignupPage> {
 
   String? _validateName(String value) {
     if (value.isEmpty) {
-      return 'Please enter your name';
+      return S.of(context).pleaseEnterYourName;
     }
     return null;
   }
 
   String? _validateMobile(String value) {
     if (value.isEmpty) {
-      return 'Please enter your mobile number';
+      return S.of(context).pleaseEnterYourMobileNumber;
     } else if (value.length != 10) {
-      return 'Please enter exactly 10 digits';
+      return S.of(context).pleaseEnterExactly10Digits;
     } else if (!RegExp(r'^[6-9]').hasMatch(value[0])) {
-      return 'Mobile number must start with 6, 7, 8, or 9';
+      return S.of(context).mobileNumberMustStartWith6;
     }
     return null;
   }
 
   String? _validateEmail(String value) {
     if (value.isEmpty) {
-      return 'Please enter your email';
+      return S.of(context).pleaseEnterYourEmail;
     }
     final emailRegex = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
     if (!emailRegex.hasMatch(value)) {
-      return 'Please enter a valid email address';
+      return S.of(context).pleaseEnterAValidEmailAddress;
     }
     return null;
   }
 
   String? _validatePassword(String value) {
     if (value.isEmpty) {
-      return 'Please enter your password';
+      return S.of(context).pleaseEnterYourPassword;
     } else if (value.length < 6) {
-      return 'Password must be at least 6 characters';
+      return S.of(context).passwordMustBeAtLeast6Characters;
     }
     return null;
   }
 
   String? _validateConfirmPassword(String value, String password) {
     if (value.isEmpty) {
-      return 'Please confirm your password';
+      return S.of(context).pleaseConfirmYourPassword;
     } else if (value != password) {
-      return 'Passwords do not match';
+      return S.of(context).passwordsDoNotMatch;
     }
     return null;
   }
@@ -134,7 +137,7 @@ class _SignupPageState extends State<SignupPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Sign up!",
+                            S.of(context).signUp,
                             style: AppTextStyles.headerStyle,
                           ),
                           const SizedBox(height: 40),
@@ -154,12 +157,13 @@ class _SignupPageState extends State<SignupPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Your Name", style: AppTextStyles.titleStyle),
+                        Text(S.of(context).yourName,
+                            style: AppTextStyles.titleStyle),
                         const SizedBox(height: 8),
                         TextFormField(
                             controller: _nameController,
                             decoration: AppInputDecorations.textFieldDecoration(
-                              hintText: "your name",
+                              hintText: S.of(context).yourName,
                               borderColor: _nameError != null
                                   ? Colors.red
                                   : AppColors.hintTextColor,
@@ -184,7 +188,8 @@ class _SignupPageState extends State<SignupPage> {
                             ),
                           ),
                         const SizedBox(height: 10),
-                        Text("Mobile No", style: AppTextStyles.titleStyle),
+                        Text(S.of(context).mobileNo,
+                            style: AppTextStyles.titleStyle),
                         const SizedBox(height: 8),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -238,7 +243,7 @@ class _SignupPageState extends State<SignupPage> {
                                       child: TextFormField(
                                         controller: _mobileController,
                                         decoration: InputDecoration(
-                                          hintText: "9000012345",
+                                          hintText: '9000012345',
                                           hintStyle: AppTextStyles
                                               .textInputStyle
                                               .copyWith(
@@ -279,21 +284,21 @@ class _SignupPageState extends State<SignupPage> {
                           ],
                         ),
                         const SizedBox(height: 10),
-                        Text("Your Email", style: AppTextStyles.titleStyle),
+                        Text(S.of(context).email,
+                            style: AppTextStyles.titleStyle),
                         const SizedBox(height: 8),
                         TextFormField(
-                          controller: _emailController,
-                          decoration: AppInputDecorations.textFieldDecoration(
-                            hintText: "example@gmail.com",
-                            borderColor: _emailError != null
-                                ? Colors.red
-                                : AppColors.hintTextColor,
-                          ),
-                          keyboardType: TextInputType.emailAddress,
-                          onChanged: (value) => _validateField('email'),
-                          validator: (_) => _emailError,
-                          style: TextStyle(fontFamily: 'Poppins'),
-                        ),
+                            controller: _emailController,
+                            decoration: AppInputDecorations.textFieldDecoration(
+                              hintText: S.of(context).email,
+                              borderColor: _emailError != null
+                                  ? Colors.red
+                                  : AppColors.hintTextColor,
+                            ),
+                            keyboardType: TextInputType.emailAddress,
+                            onChanged: (value) => _validateField('email'),
+                            validator: (_) => _emailError,
+                            style: TextStyle(fontFamily: 'Poppins')),
                         if (_emailError != null)
                           Padding(
                             padding:
@@ -307,12 +312,13 @@ class _SignupPageState extends State<SignupPage> {
                             ),
                           ),
                         const SizedBox(height: 10),
-                        Text("Password", style: AppTextStyles.titleStyle),
+                        Text(S.of(context).password,
+                            style: AppTextStyles.titleStyle),
                         const SizedBox(height: 8),
                         TextFormField(
                           controller: _passwordController,
                           decoration: AppInputDecorations.textFieldDecoration(
-                            hintText: "********",
+                            hintText: '*********',
                             isPassword: true,
                             borderColor: _passwordError != null
                                 ? Colors.red
@@ -323,7 +329,6 @@ class _SignupPageState extends State<SignupPage> {
                                 _passwordVisible
                                     ? Icons.visibility
                                     : Icons.visibility_off,
-                                color: AppColors.hintTextColor,
                               ),
                               onPressed: () {
                                 setState(() {
@@ -350,13 +355,13 @@ class _SignupPageState extends State<SignupPage> {
                             ),
                           ),
                         const SizedBox(height: 10),
-                        Text("Confirm Password",
+                        Text(S.of(context).confirmPassword,
                             style: AppTextStyles.titleStyle),
                         const SizedBox(height: 8),
                         TextFormField(
                           controller: _confirmPasswordController,
                           decoration: AppInputDecorations.textFieldDecoration(
-                            hintText: "********",
+                            hintText: '********',
                             isPassword: true,
                             borderColor: _passwordError != null
                                 ? Colors.red
@@ -367,7 +372,6 @@ class _SignupPageState extends State<SignupPage> {
                                 _confirmPasswordVisible
                                     ? Icons.visibility
                                     : Icons.visibility_off,
-                                color: AppColors.hintTextColor,
                               ),
                               onPressed: () {
                                 setState(() {
@@ -403,7 +407,7 @@ class _SignupPageState extends State<SignupPage> {
                           child: ElevatedButton(
                             onPressed: _submitForm,
                             child: Text(
-                              "Sign Up",
+                              S.of(context).signUp,
                               style: AppTextStyles.defaultStyle.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w600,
@@ -419,12 +423,12 @@ class _SignupPageState extends State<SignupPage> {
                             alignment: Alignment.bottomCenter,
                             child: RichText(
                               text: TextSpan(
-                                text: "Already have an account? ",
+                                text: S.of(context).alreadyHaveAnAccount,
                                 style: AppTextStyles.defaultStyle
                                     .copyWith(fontWeight: FontWeight.w600),
                                 children: [
                                   TextSpan(
-                                    text: "Login",
+                                    text: S.of(context).login,
                                     style: AppTextStyles.defaultStyle.copyWith(
                                       color: AppButtonStyles
                                           .elevatedButtonStyle.backgroundColor
