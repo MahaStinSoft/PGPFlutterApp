@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'colors.dart'; // Import the colors.dart file
+import 'colors.dart';
 
-// Define TextStyles
 class AppTextStyles {
   static const TextStyle headerStyle = TextStyle(
-    color: AppColors.textDarkColor, // or any other color
+    color: AppColors.textDarkColor,
     fontSize: 20,
     fontWeight: FontWeight.w600,
     fontFamily: 'Poppins',
   );
 
   static const TextStyle navbarStyle = TextStyle(
-    color: AppColors.primaryColor, // or any other color
+    color: AppColors.primaryColor,
     fontSize: 20,
     fontWeight: FontWeight.w600,
     fontFamily: 'Poppins',
@@ -35,15 +34,18 @@ class AppTextStyles {
   );
 }
 
-// Define InputDecoration constants
 class AppInputDecorations {
   static InputDecoration textFieldDecoration({
     required String hintText,
+    Color fillColor = Colors.white,
+    bool isPassword = false,
+    bool isConfirmPassword = false,
     Color borderColor = AppColors.hintTextColor,
+    Color hintTextColor = Colors.grey,
   }) {
     return InputDecoration(
       filled: true,
-      fillColor: Colors.white,
+      fillColor: fillColor,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
         borderSide: BorderSide(color: borderColor),
@@ -58,17 +60,23 @@ class AppInputDecorations {
       ),
       hintText: hintText,
       hintStyle: AppTextStyles.textInputStyle.copyWith(
-        color: borderColor,
+        color: hintTextColor, // Use hintTextColor here
         fontWeight: FontWeight.normal,
       ),
-      contentPadding: EdgeInsets.symmetric(
-          vertical: 8.0,
-          horizontal: 12.0), // Adjust vertical padding to reduce height
+      contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+      suffixIcon: isPassword || isConfirmPassword
+          ? IconButton(
+              icon: Icon(
+                Icons.visibility,
+                color: AppColors.hintTextColor,
+              ),
+              onPressed: () {},
+            )
+          : null,
     );
   }
 }
 
-// Define Button styles
 class AppButtonStyles {
   static ButtonStyle elevatedButtonStyle = ElevatedButton.styleFrom(
     backgroundColor: AppColors.primaryColor,
@@ -79,7 +87,6 @@ class AppButtonStyles {
   );
 }
 
-// Define Icon styles
 class AppIconStyles {
   static const Color iconColor = AppColors.iconsColor;
 }

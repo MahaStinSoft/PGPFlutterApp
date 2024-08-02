@@ -13,8 +13,93 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _mobileController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
+  String? _nameError;
   String? _phoneError;
+  String? _emailError;
+  String? _passwordError;
+  String? _confirmPasswordError;
+
+  bool _passwordVisible = false;
+  bool _confirmPasswordVisible = false;
+
+  void _validateField(String field) {
+    setState(() {
+      switch (field) {
+        case 'name':
+          _nameError = _validateName(_nameController.text);
+          break;
+        case 'mobile':
+          _phoneError = _validateMobile(_mobileController.text);
+          break;
+        case 'email':
+          _emailError = _validateEmail(_emailController.text);
+          break;
+        case 'password':
+          _passwordError = _validatePassword(_passwordController.text);
+          break;
+        case 'confirmPassword':
+          _confirmPasswordError = _validateConfirmPassword(
+            _confirmPasswordController.text,
+            _passwordController.text,
+          );
+          break;
+      }
+    });
+  }
+
+  String? _validateName(String value) {
+    if (value.isEmpty) {
+      return 'Please enter your name';
+    }
+    return null;
+  }
+
+  String? _validateMobile(String value) {
+    if (value.isEmpty) {
+      return 'Please enter your mobile number';
+    } else if (value.length != 10) {
+      return 'Please enter exactly 10 digits';
+    } else if (!RegExp(r'^[6-9]').hasMatch(value[0])) {
+      return 'Mobile number must start with 6, 7, 8, or 9';
+    }
+    return null;
+  }
+
+  String? _validateEmail(String value) {
+    if (value.isEmpty) {
+      return 'Please enter your email';
+    }
+    final emailRegex = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
+    if (!emailRegex.hasMatch(value)) {
+      return 'Please enter a valid email address';
+    }
+    return null;
+  }
+
+  String? _validatePassword(String value) {
+    if (value.isEmpty) {
+      return 'Please enter your password';
+    } else if (value.length < 6) {
+      return 'Password must be at least 6 characters';
+    }
+    return null;
+  }
+
+  String? _validateConfirmPassword(String value, String password) {
+    if (value.isEmpty) {
+      return 'Please confirm your password';
+    } else if (value != password) {
+      return 'Passwords do not match';
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +111,6 @@ class _SignupPageState extends State<SignupPage> {
     return Scaffold(
       body: Stack(
         children: [
-          // Background Image
           Positioned(
             top: 0,
             left: 0,
@@ -37,12 +121,10 @@ class _SignupPageState extends State<SignupPage> {
               fit: BoxFit.cover,
             ),
           ),
-          // Signup Form
           Form(
             key: _formKey,
             child: Column(
               children: [
-                // Header Section with Logo
                 Container(
                   padding: const EdgeInsets.fromLTRB(32.0, 79.0, 32.0, 20.0),
                   child: Row(
@@ -72,26 +154,36 @@ class _SignupPageState extends State<SignupPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Name Field
                         Text("Your Name", style: AppTextStyles.titleStyle),
                         const SizedBox(height: 8),
                         TextFormField(
-                          decoration: AppInputDecorations.textFieldDecoration(
-                            hintText: "your name",
+                            controller: _nameController,
+                            decoration: AppInputDecorations.textFieldDecoration(
+                              hintText: "your name",
+                              borderColor: _nameError != null
+                                  ? Colors.red
+                                  : AppColors.hintTextColor,
+                            ),
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'[a-zA-Z\s]'))
+                            ],
+                            onChanged: (value) => _validateField('name'),
+                            validator: (_) => _nameError,
+                            style: TextStyle(fontFamily: 'Poppins')),
+                        if (_nameError != null)
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(10.0, 8.0, 0.0, 0.0),
+                            child: Text(
+                              _nameError!,
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 184, 19, 7),
+                                fontSize: 12,
+                              ),
+                            ),
                           ),
-                          inputFormatters: [
-                            FilteringTextInputFormatter.allow(
-                                RegExp('[a-zA-Z]')),
-                          ],
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your name';
-                            }
-                            return null;
-                          },
-                        ),
                         const SizedBox(height: 10),
-                        // Mobile No Field
                         Text("Mobile No", style: AppTextStyles.titleStyle),
                         const SizedBox(height: 8),
                         Column(
@@ -104,13 +196,12 @@ class _SignupPageState extends State<SignupPage> {
                                 children: [
                                   Container(
                                     width: 60,
-                                    height: 48,
+                                    height: 47,
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       border: Border.all(
                                         color: _phoneError != null
-                                            ? const Color.fromARGB(
-                                                255, 184, 19, 7)
+                                            ? Colors.red
                                             : AppColors.hintTextColor,
                                       ),
                                       borderRadius: BorderRadius.circular(10),
@@ -139,8 +230,7 @@ class _SignupPageState extends State<SignupPage> {
                                         color: Colors.white,
                                         border: Border.all(
                                           color: _phoneError != null
-                                              ? const Color.fromARGB(
-                                                  255, 184, 19, 7)
+                                              ? Colors.red
                                               : AppColors.hintTextColor,
                                         ),
                                         borderRadius: BorderRadius.circular(10),
@@ -164,26 +254,10 @@ class _SignupPageState extends State<SignupPage> {
                                           FilteringTextInputFormatter
                                               .digitsOnly,
                                         ],
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            setState(() {
-                                              _phoneError =
-                                                  'Please enter your mobile number';
-                                            });
-                                            return null;
-                                          } else if (value.length != 10) {
-                                            setState(() {
-                                              _phoneError =
-                                                  'Please enter exactly 10 digits';
-                                            });
-                                            return null;
-                                          }
-                                          setState(() {
-                                            _phoneError =
-                                                null; // Clear error if valid
-                                          });
-                                          return null;
-                                        },
+                                        onChanged: (value) =>
+                                            _validateField('mobile'),
+                                        validator: (_) => _phoneError,
+                                        style: TextStyle(fontFamily: 'Poppins'),
                                       ),
                                     ),
                                   ),
@@ -205,71 +279,129 @@ class _SignupPageState extends State<SignupPage> {
                           ],
                         ),
                         const SizedBox(height: 10),
-                        // Email Field
                         Text("Your Email", style: AppTextStyles.titleStyle),
                         const SizedBox(height: 8),
                         TextFormField(
+                          controller: _emailController,
                           decoration: AppInputDecorations.textFieldDecoration(
                             hintText: "example@gmail.com",
+                            borderColor: _emailError != null
+                                ? Colors.red
+                                : AppColors.hintTextColor,
                           ),
                           keyboardType: TextInputType.emailAddress,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your email';
-                            }
-                            final emailRegex =
-                                RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
-                            if (!emailRegex.hasMatch(value)) {
-                              return 'Please enter a valid email address';
-                            }
-                            return null;
-                          },
+                          onChanged: (value) => _validateField('email'),
+                          validator: (_) => _emailError,
+                          style: TextStyle(fontFamily: 'Poppins'),
                         ),
+                        if (_emailError != null)
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(10.0, 8.0, 0.0, 0.0),
+                            child: Text(
+                              _emailError!,
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 184, 19, 7),
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
                         const SizedBox(height: 10),
-                        // Password Field
                         Text("Password", style: AppTextStyles.titleStyle),
                         const SizedBox(height: 8),
                         TextFormField(
-                          obscureText: true,
+                          controller: _passwordController,
                           decoration: AppInputDecorations.textFieldDecoration(
-                            hintText: "**********",
+                            hintText: "********",
+                            isPassword: true,
+                            borderColor: _passwordError != null
+                                ? Colors.red
+                                : AppColors.hintTextColor,
+                          ).copyWith(
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _passwordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: AppColors.hintTextColor,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _passwordVisible = !_passwordVisible;
+                                });
+                              },
+                            ),
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your password';
-                            }
-                            return null;
-                          },
+                          obscureText: !_passwordVisible,
+                          onChanged: (value) => _validateField('password'),
+                          validator: (_) => _passwordError,
+                          style: TextStyle(fontFamily: 'Poppins'),
                         ),
+                        if (_passwordError != null)
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(10.0, 8.0, 0.0, 0.0),
+                            child: Text(
+                              _passwordError!,
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 184, 19, 7),
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
                         const SizedBox(height: 10),
-                        // Confirm Password Field
                         Text("Confirm Password",
                             style: AppTextStyles.titleStyle),
                         const SizedBox(height: 8),
                         TextFormField(
-                          obscureText: true,
+                          controller: _confirmPasswordController,
                           decoration: AppInputDecorations.textFieldDecoration(
-                            hintText: "**********",
+                            hintText: "********",
+                            isPassword: true,
+                            borderColor: _passwordError != null
+                                ? Colors.red
+                                : AppColors.hintTextColor,
+                          ).copyWith(
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _confirmPasswordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: AppColors.hintTextColor,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _confirmPasswordVisible =
+                                      !_confirmPasswordVisible;
+                                });
+                              },
+                            ),
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please confirm your password';
-                            }
-                            // Optionally, add additional validation to match passwords
-                            return null;
-                          },
+                          obscureText: !_confirmPasswordVisible,
+                          onChanged: (value) =>
+                              _validateField('confirmPassword'),
+                          validator: (_) => _confirmPasswordError,
+                          style: TextStyle(fontFamily: 'Poppins'),
                         ),
+                        if (_confirmPasswordError != null)
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(10.0, 8.0, 0.0, 0.0),
+                            child: Text(
+                              _confirmPasswordError!,
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 184, 19, 7),
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
                         const SizedBox(height: 20),
                         // Signup Button
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 10),
                           width: double.infinity,
                           child: ElevatedButton(
-                            onPressed: () {
-                              if (_formKey.currentState?.validate() ?? false) {
-                                // Perform signup action
-                              }
-                            },
+                            onPressed: _submitForm,
                             child: Text(
                               "Sign Up",
                               style: AppTextStyles.defaultStyle.copyWith(
@@ -281,7 +413,6 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                         ),
                         const SizedBox(height: 40),
-                        // Already have an account Text
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Align(
@@ -320,5 +451,28 @@ class _SignupPageState extends State<SignupPage> {
         ],
       ),
     );
+  }
+
+  void _submitForm() {
+    setState(() {
+      _nameError = _validateName(_nameController.text);
+      _phoneError = _validateMobile(_mobileController.text);
+      _emailError = _validateEmail(_emailController.text);
+      _passwordError = _validatePassword(_passwordController.text);
+      _confirmPasswordError = _validateConfirmPassword(
+        _confirmPasswordController.text,
+        _passwordController.text,
+      );
+    });
+
+    if (_nameError == null &&
+        _phoneError == null &&
+        _emailError == null &&
+        _passwordError == null &&
+        _confirmPasswordError == null) {
+      // Proceed with sign-up process
+      // Example: Navigator.pushNamed(context, '/home');
+      print('Form Submitted');
+    }
   }
 }
