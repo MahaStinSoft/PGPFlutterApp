@@ -5,6 +5,7 @@ import 'package:flutterapp/styles.dart';
 import 'package:flutterapp/widgets/GrievanceButton.dart';
 import 'package:flutterapp/widgets/GrievanceCounter.dart';
 import 'package:flutterapp/generated/l10n.dart';
+import 'package:flutterapp/widgets/grievanceFrom.dart';
 import 'package:flutterapp/widgets/myGrievance.dart'; // Ensure you import the GrievancePage
 
 class HomePage extends StatefulWidget {
@@ -96,7 +97,11 @@ class _HomePageState extends State<HomePage> {
                         label: S.of(context).newGrievance,
                         color: Colors.blue,
                         onPressed: () {
-                          // Handle navigation or action here
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => GrievanceFormScreen()),
+                          );
                         },
                       ),
                       GrievanceButton(
