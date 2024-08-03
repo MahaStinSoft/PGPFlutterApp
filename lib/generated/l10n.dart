@@ -459,6 +459,266 @@ class S {
       args: [],
     );
   }
+
+  /// `Grievance Form`
+  String get grievanceFormTitle {
+    return Intl.message(
+      'Grievance Form',
+      name: 'grievanceFormTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Grievance Type`
+  String get grievanceType {
+    return Intl.message(
+      'Grievance Type',
+      name: 'grievanceType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Grievance Type`
+  String get selectGrievanceType {
+    return Intl.message(
+      'Select Grievance Type',
+      name: 'selectGrievanceType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Grievance`
+  String get grievance {
+    return Intl.message(
+      'Grievance',
+      name: 'grievance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your query`
+  String get enterYourQuery {
+    return Intl.message(
+      'Enter your query',
+      name: 'enterYourQuery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Grievance Location`
+  String get grievanceLocation {
+    return Intl.message(
+      'Grievance Location',
+      name: 'grievanceLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Taluk`
+  String get taluk {
+    return Intl.message(
+      'Taluk',
+      name: 'taluk',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Taluk`
+  String get selectTaluk {
+    return Intl.message(
+      'Select Taluk',
+      name: 'selectTaluk',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Union`
+  String get union {
+    return Intl.message(
+      'Union',
+      name: 'union',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Union`
+  String get selectUnion {
+    return Intl.message(
+      'Select Union',
+      name: 'selectUnion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Town Panchayat`
+  String get townPanchayat {
+    return Intl.message(
+      'Town Panchayat',
+      name: 'townPanchayat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Town Panchayat`
+  String get selectTownPanchayat {
+    return Intl.message(
+      'Select Town Panchayat',
+      name: 'selectTownPanchayat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Village Panchayat`
+  String get villagePanchayat {
+    return Intl.message(
+      'Village Panchayat',
+      name: 'villagePanchayat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Village Panchayat`
+  String get selectVillagePanchayat {
+    return Intl.message(
+      'Select Village Panchayat',
+      name: 'selectVillagePanchayat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Village / Town`
+  String get villageTown {
+    return Intl.message(
+      'Village / Town',
+      name: 'villageTown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Village / Town`
+  String get selectVillageTown {
+    return Intl.message(
+      'Select Village / Town',
+      name: 'selectVillageTown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ward No`
+  String get wardNo {
+    return Intl.message(
+      'Ward No',
+      name: 'wardNo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Ward No`
+  String get selectWardNo {
+    return Intl.message(
+      'Select Ward No',
+      name: 'selectWardNo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Street Name`
+  String get streetName {
+    return Intl.message(
+      'Street Name',
+      name: 'streetName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Street`
+  String get selectStreetName {
+    return Intl.message(
+      'Select Street',
+      name: 'selectStreetName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit`
+  String get submit {
+    return Intl.message(
+      'Submit',
+      name: 'submit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type1`
+  String get type1 {
+    return Intl.message(
+      'Type1',
+      name: 'type1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type2`
+  String get type2 {
+    return Intl.message(
+      'Type2',
+      name: 'type2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type3`
+  String get type3 {
+    return Intl.message(
+      'Type3',
+      name: 'type3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select a {label}`
+  String pleaseSelect(Object label) {
+    return Intl.message(
+      'Please select a $label',
+      name: 'pleaseSelect',
+      desc: '',
+      args: [label],
+    );
+  }
+
+  /// `Please enter {label}`
+  String pleaseEnter(Object label) {
+    return Intl.message(
+      'Please enter $label',
+      name: 'pleaseEnter',
+      desc: '',
+      args: [label],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

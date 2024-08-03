@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class AppColors {
   static const Color primaryColor = Color.fromRGBO(18, 74, 21, 1); // Green
   static const Color secondaryColor =
-      Color(0xFF004D40); // Dark Teal (example secondary color)
+      Color.fromARGB(255, 220, 237, 200); // Dark Teal (example secondary color)
   static const Color textDarkColor = Colors.black;
   static const Color textLightColor = Colors.white;
   static const Color normalTextColor = Colors.grey;

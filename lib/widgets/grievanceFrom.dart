@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/colors.dart';
-import 'package:flutterapp/styles.dart'; // Ensure this file exists and contains the AppColors definition
+import 'package:flutterapp/styles.dart';
+import 'package:flutterapp/generated/l10n.dart';
 
 class GrievanceFormScreen extends StatefulWidget {
   @override
@@ -22,21 +23,22 @@ class _GrievanceFormScreenState extends State<GrievanceFormScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(
-            'Grievance Form',
-            style: AppTextStyles.headerStyle,
+        title: Text(
+          S.of(context).myGrievance,
+          style: AppTextStyles.headerStyle,
+        ),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            size: 30.0,
           ),
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              size: 30.0,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          backgroundColor: Colors.lightGreen[100],
-          toolbarHeight: 80.0),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        backgroundColor: AppColors.secondaryColor,
+        toolbarHeight: 80.0,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(32.0),
         child: Form(
@@ -44,10 +46,14 @@ class _GrievanceFormScreenState extends State<GrievanceFormScreen> {
           child: ListView(
             children: <Widget>[
               _buildDropdownField(
-                label: 'Grievance Type',
+                label: S.of(context).grievanceType,
                 value: grievanceType,
-                hint: 'Select Grievance Type',
-                items: ['Type 1', 'Type 2', 'Type 3'],
+                hint: S.of(context).selectGrievanceType,
+                items: [
+                  S.of(context).type1,
+                  S.of(context).type2,
+                  S.of(context).type3
+                ],
                 onChanged: (newValue) {
                   setState(() {
                     grievanceType = newValue;
@@ -55,22 +61,22 @@ class _GrievanceFormScreenState extends State<GrievanceFormScreen> {
                 },
               ),
               _buildTextField(
-                label: 'Grievance',
-                hint: 'Enter your query',
+                label: S.of(context).grievance,
+                hint: S.of(context).enterYourQuery,
                 maxLines: 4,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Text(
-                  'Grievance Location',
+                  S.of(context).grievanceLocation,
                   style: AppTextStyles.defaultStyle
                       .copyWith(fontWeight: FontWeight.w600),
                 ),
               ),
               _buildDropdownField(
-                label: 'Taluk',
+                label: S.of(context).taluk,
                 value: taluk,
-                hint: 'Select Taluk',
+                hint: S.of(context).selectTaluk,
                 items: ['Taluk 1', 'Taluk 2', 'Taluk 3'],
                 onChanged: (newValue) {
                   setState(() {
@@ -79,9 +85,9 @@ class _GrievanceFormScreenState extends State<GrievanceFormScreen> {
                 },
               ),
               _buildDropdownField(
-                label: 'Union',
+                label: S.of(context).union,
                 value: union,
-                hint: 'Select Union',
+                hint: S.of(context).selectUnion,
                 items: ['Union 1', 'Union 2', 'Union 3'],
                 onChanged: (newValue) {
                   setState(() {
@@ -90,9 +96,9 @@ class _GrievanceFormScreenState extends State<GrievanceFormScreen> {
                 },
               ),
               _buildDropdownField(
-                label: 'Town Panchayat',
+                label: S.of(context).townPanchayat,
                 value: townPanchayat,
-                hint: 'Select Town Panchayat',
+                hint: S.of(context).selectTownPanchayat,
                 items: [
                   'Town Panchayat 1',
                   'Town Panchayat 2',
@@ -105,9 +111,9 @@ class _GrievanceFormScreenState extends State<GrievanceFormScreen> {
                 },
               ),
               _buildDropdownField(
-                label: 'Village Panchayat',
+                label: S.of(context).villagePanchayat,
                 value: villagePanchayat,
-                hint: 'Select Village Panchayat',
+                hint: S.of(context).selectVillagePanchayat,
                 items: [
                   'Village Panchayat 1',
                   'Village Panchayat 2',
@@ -120,9 +126,9 @@ class _GrievanceFormScreenState extends State<GrievanceFormScreen> {
                 },
               ),
               _buildDropdownField(
-                label: 'Village / Town',
+                label: S.of(context).villageTown,
                 value: villageTown,
-                hint: 'Select Village / Town',
+                hint: S.of(context).selectVillageTown,
                 items: ['Village 1', 'Town 1', 'Village 2', 'Town 2'],
                 onChanged: (newValue) {
                   setState(() {
@@ -131,9 +137,9 @@ class _GrievanceFormScreenState extends State<GrievanceFormScreen> {
                 },
               ),
               _buildDropdownField(
-                label: 'Ward No',
+                label: S.of(context).wardNo,
                 value: wardNo,
-                hint: 'Select Ward No',
+                hint: S.of(context).selectWardNo,
                 items: ['Ward 1', 'Ward 2', 'Ward 3'],
                 onChanged: (newValue) {
                   setState(() {
@@ -142,9 +148,9 @@ class _GrievanceFormScreenState extends State<GrievanceFormScreen> {
                 },
               ),
               _buildDropdownField(
-                label: 'Street Name',
+                label: S.of(context).streetName,
                 value: streetName,
-                hint: 'Select Street',
+                hint: S.of(context).selectStreetName,
                 items: ['Street 1', 'Street 2', 'Street 3'],
                 onChanged: (newValue) {
                   setState(() {
@@ -152,21 +158,6 @@ class _GrievanceFormScreenState extends State<GrievanceFormScreen> {
                   });
                 },
               ),
-              // SizedBox(height: 20),
-              // ElevatedButton(
-              //   onPressed: () {
-              //     if (_formKey.currentState?.validate() ?? false) {
-              //       // Process the form submission
-              //     }
-              //   },
-              //   style: ElevatedButton.styleFrom(
-              //     backgroundColor: Colors.green,
-              //     shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(8.0),
-              //     ),
-              //   ),
-              //   child: Text('Submit'),
-              // ),
               const SizedBox(height: 10),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -181,7 +172,7 @@ class _GrievanceFormScreenState extends State<GrievanceFormScreen> {
                         }
                       },
                       child: Text(
-                        'Submit',
+                        S.of(context).submit,
                         style: AppTextStyles.defaultStyle.copyWith(
                           color: AppColors.textLightColor,
                           fontWeight: FontWeight.w600,
@@ -217,63 +208,53 @@ class _GrievanceFormScreenState extends State<GrievanceFormScreen> {
                 .copyWith(fontWeight: FontWeight.w600),
           ),
           SizedBox(height: 8),
-          FormField<String>(
-            builder: (FormFieldState<String> state) {
-              return InputDecorator(
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(
-                      vertical: 5.0,
-                      horizontal: 12.0), // Adjust vertical padding
-                  hintText: hint,
-                  hintStyle: TextStyle(color: AppColors.hintTextColor),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(
-                      color: AppColors.hintTextColor,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(
-                      color: AppColors.hintTextColor,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(
-                      color: AppColors.hintTextColor,
-                    ),
-                  ),
-                  filled: true,
-                  fillColor: Colors.white,
+          ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: double.infinity),
+            child: InputDecorator(
+              decoration: InputDecoration(
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 2.0, horizontal: 12.0),
+                hintText: hint,
+                hintStyle: TextStyle(color: AppColors.hintTextColor),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(color: AppColors.hintTextColor),
                 ),
-                child: DropdownButtonHideUnderline(
-                  child: SizedBox(
-                    height: 40.0, // Adjust height here
-                    child: DropdownButton<String>(
-                      value: value,
-                      onChanged: (newValue) {
-                        onChanged(newValue);
-                        state.didChange(newValue);
-                      },
-                      items: items.map((String item) {
-                        return DropdownMenuItem<String>(
-                          value: item,
-                          child: Text(item),
-                        );
-                      }).toList(),
-                      hint: Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          hint,
-                          style: TextStyle(color: AppColors.hintTextColor),
-                        ),
-                      ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(color: AppColors.hintTextColor),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(color: AppColors.hintTextColor),
+                ),
+                filled: true,
+                fillColor: Colors.white,
+              ),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  isExpanded:
+                      true, // Ensures the DropdownButton takes full width
+                  value: value,
+                  onChanged: (newValue) {
+                    onChanged(newValue);
+                  },
+                  items: items.map((String item) {
+                    return DropdownMenuItem<String>(
+                      value: item,
+                      child: Text(item),
+                    );
+                  }).toList(),
+                  hint: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      hint,
+                      style: TextStyle(color: AppColors.hintTextColor),
                     ),
                   ),
                 ),
-              );
-            },
+              ),
+            ),
           ),
         ],
       ),
@@ -302,21 +283,15 @@ class _GrievanceFormScreenState extends State<GrievanceFormScreen> {
               hintStyle: TextStyle(color: AppColors.hintTextColor),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.0),
-                borderSide: BorderSide(
-                  color: AppColors.hintTextColor,
-                ),
+                borderSide: BorderSide(color: AppColors.hintTextColor),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.0),
-                borderSide: BorderSide(
-                  color: AppColors.hintTextColor,
-                ),
+                borderSide: BorderSide(color: AppColors.hintTextColor),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.0),
-                borderSide: BorderSide(
-                  color: AppColors.hintTextColor,
-                ),
+                borderSide: BorderSide(color: AppColors.hintTextColor),
               ),
               filled: true,
               fillColor: Colors.white,

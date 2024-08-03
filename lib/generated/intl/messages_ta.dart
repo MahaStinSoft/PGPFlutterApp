@@ -20,6 +20,10 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ta';
 
+  static String m0(label) => "${label} ஐ உள்ளிடவும்";
+
+  static String m1(label) => "${label} ஐத் தேர்ந்தெடுக்கவும்";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "alreadyHaveAnAccount":
@@ -35,9 +39,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailHint": MessageLookupByLibrary.simpleMessage(
             "உங்கள் மின்னஞ்சலை உள்ளிடவும்"),
         "english": MessageLookupByLibrary.simpleMessage("ஆங்கிலம்"),
+        "enterYourQuery":
+            MessageLookupByLibrary.simpleMessage("உங்கள் கேள்வியை உள்ளிடவும்"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage(
             "கடவுச்சொல்லை மறந்துவிட்டீர்களா?"),
         "gallery": MessageLookupByLibrary.simpleMessage("படக்காட்சிகள்"),
+        "grievance": MessageLookupByLibrary.simpleMessage("பிரச்சினை"),
+        "grievanceFormTitle":
+            MessageLookupByLibrary.simpleMessage("பிரச்சினைப் படிவம்"),
+        "grievanceLocation":
+            MessageLookupByLibrary.simpleMessage("பிரச்சினை இடம்"),
+        "grievanceType": MessageLookupByLibrary.simpleMessage("பிரச்சினை வகை"),
         "knowYourMunicipality": MessageLookupByLibrary.simpleMessage(
             "உங்கள் மாகாணத்தை தெரிந்து கொள்ளுங்கள்"),
         "login": MessageLookupByLibrary.simpleMessage("உள்நுழைய"),
@@ -62,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("கடவுச்சொற்கள் பொருந்தவில்லை"),
         "pleaseConfirmYourPassword": MessageLookupByLibrary.simpleMessage(
             "உங்கள் கடவுச்சொல்லை உறுதிப்படுத்தவும்"),
+        "pleaseEnter": m0,
         "pleaseEnterAValidEmailAddress": MessageLookupByLibrary.simpleMessage(
             "சரியான மின்னஞ்சல் முகவரியை உள்ளிடவும்"),
         "pleaseEnterExactly10Digits": MessageLookupByLibrary.simpleMessage(
@@ -74,16 +87,45 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("உங்கள் பெயரை உள்ளிடவும்"),
         "pleaseEnterYourPassword": MessageLookupByLibrary.simpleMessage(
             "உங்கள் கடவுச்சொல்லை உள்ளிடவும்"),
+        "pleaseSelect": m1,
         "registeredGrievance":
             MessageLookupByLibrary.simpleMessage("பதிவு செய்யப்பட்ட புகார்"),
         "resolvedGrievance": MessageLookupByLibrary.simpleMessage(
             "முதற்கொண்டு தீர்க்கப்பட்ட புகார்"),
+        "selectGrievanceType": MessageLookupByLibrary.simpleMessage(
+            "பிரச்சினை வகையைத் தேர்ந்தெடுக்கவும்"),
+        "selectStreetName":
+            MessageLookupByLibrary.simpleMessage("சாலையைத் தேர்ந்தெடுக்கவும்"),
+        "selectTaluk":
+            MessageLookupByLibrary.simpleMessage("தலூகைத் தேர்ந்தெடுக்கவும்"),
+        "selectTownPanchayat": MessageLookupByLibrary.simpleMessage(
+            "நகர பஞ்சாயத்தை தேர்ந்தெடுக்கவும்"),
+        "selectUnion":
+            MessageLookupByLibrary.simpleMessage("அணியைத் தேர்ந்தெடுக்கவும்"),
+        "selectVillagePanchayat": MessageLookupByLibrary.simpleMessage(
+            "கிராம பஞ்சாயத்தை தேர்ந்தெடுக்கவும்"),
+        "selectVillageTown": MessageLookupByLibrary.simpleMessage(
+            "கிராமம் / நகரத்தைத் தேர்ந்தெடுக்கவும்"),
+        "selectWardNo": MessageLookupByLibrary.simpleMessage(
+            "வர்டு எண்களைத் தேர்ந்தெடுக்கவும்"),
         "signIn": MessageLookupByLibrary.simpleMessage("உள்நுழைய"),
         "signUp": MessageLookupByLibrary.simpleMessage("பதிவு செய்க"),
+        "streetName": MessageLookupByLibrary.simpleMessage("சாலையின் பெயர்"),
+        "submit": MessageLookupByLibrary.simpleMessage("சமர்ப்பிக்கவும்"),
         "submittedGrievance":
             MessageLookupByLibrary.simpleMessage("சமர்ப்பிக்கப்பட்ட புகார்"),
+        "taluk": MessageLookupByLibrary.simpleMessage("தலுக்"),
         "tamil": MessageLookupByLibrary.simpleMessage("தமிழ்"),
+        "townPanchayat": MessageLookupByLibrary.simpleMessage("நகர பஞ்சாயத்து"),
+        "type1": MessageLookupByLibrary.simpleMessage("வகை1"),
+        "type2": MessageLookupByLibrary.simpleMessage("வகை2"),
+        "type3": MessageLookupByLibrary.simpleMessage("வகை3"),
+        "union": MessageLookupByLibrary.simpleMessage("அணி"),
         "videos": MessageLookupByLibrary.simpleMessage("வீடியோக்கள்"),
+        "villagePanchayat":
+            MessageLookupByLibrary.simpleMessage("கிராம பஞ்சாயத்து"),
+        "villageTown": MessageLookupByLibrary.simpleMessage("கிராமம் / நகரம்"),
+        "wardNo": MessageLookupByLibrary.simpleMessage("வர்டு எண்"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("மீண்டும் வருக!"),
         "yourEmail": MessageLookupByLibrary.simpleMessage("உங்கள் மின்னஞ்சல்"),
         "yourName": MessageLookupByLibrary.simpleMessage("உங்கள் பெயர்"),

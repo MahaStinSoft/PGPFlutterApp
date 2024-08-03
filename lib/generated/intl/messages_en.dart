@@ -20,6 +20,10 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(label) => "Please enter ${label}";
+
+  static String m1(label) => "Please select a ${label}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "alreadyHaveAnAccount":
@@ -35,9 +39,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailHint": MessageLookupByLibrary.simpleMessage("Enter your email"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
+        "enterYourQuery":
+            MessageLookupByLibrary.simpleMessage("Enter your query"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot Password?"),
         "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
+        "grievance": MessageLookupByLibrary.simpleMessage("Grievance"),
+        "grievanceFormTitle":
+            MessageLookupByLibrary.simpleMessage("Grievance Form"),
+        "grievanceLocation":
+            MessageLookupByLibrary.simpleMessage("Grievance Location"),
+        "grievanceType": MessageLookupByLibrary.simpleMessage("Grievance Type"),
         "knowYourMunicipality":
             MessageLookupByLibrary.simpleMessage("Know your Municipality"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
@@ -62,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Passwords do not match"),
         "pleaseConfirmYourPassword": MessageLookupByLibrary.simpleMessage(
             "Please confirm your password"),
+        "pleaseEnter": m0,
         "pleaseEnterAValidEmailAddress": MessageLookupByLibrary.simpleMessage(
             "Please enter a valid email address"),
         "pleaseEnterExactly10Digits": MessageLookupByLibrary.simpleMessage(
@@ -74,16 +87,42 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please enter your name"),
         "pleaseEnterYourPassword":
             MessageLookupByLibrary.simpleMessage("Please enter your password"),
+        "pleaseSelect": m1,
         "registeredGrievance":
             MessageLookupByLibrary.simpleMessage("Registered Grievance"),
         "resolvedGrievance":
             MessageLookupByLibrary.simpleMessage("Resolved Grievance"),
+        "selectGrievanceType":
+            MessageLookupByLibrary.simpleMessage("Select Grievance Type"),
+        "selectStreetName":
+            MessageLookupByLibrary.simpleMessage("Select Street"),
+        "selectTaluk": MessageLookupByLibrary.simpleMessage("Select Taluk"),
+        "selectTownPanchayat":
+            MessageLookupByLibrary.simpleMessage("Select Town Panchayat"),
+        "selectUnion": MessageLookupByLibrary.simpleMessage("Select Union"),
+        "selectVillagePanchayat":
+            MessageLookupByLibrary.simpleMessage("Select Village Panchayat"),
+        "selectVillageTown":
+            MessageLookupByLibrary.simpleMessage("Select Village / Town"),
+        "selectWardNo": MessageLookupByLibrary.simpleMessage("Select Ward No"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
+        "streetName": MessageLookupByLibrary.simpleMessage("Street Name"),
+        "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "submittedGrievance":
             MessageLookupByLibrary.simpleMessage("Submitted Grievance"),
+        "taluk": MessageLookupByLibrary.simpleMessage("Taluk"),
         "tamil": MessageLookupByLibrary.simpleMessage("தமிழ்"),
+        "townPanchayat": MessageLookupByLibrary.simpleMessage("Town Panchayat"),
+        "type1": MessageLookupByLibrary.simpleMessage("Type1"),
+        "type2": MessageLookupByLibrary.simpleMessage("Type2"),
+        "type3": MessageLookupByLibrary.simpleMessage("Type3"),
+        "union": MessageLookupByLibrary.simpleMessage("Union"),
         "videos": MessageLookupByLibrary.simpleMessage("Videos"),
+        "villagePanchayat":
+            MessageLookupByLibrary.simpleMessage("Village Panchayat"),
+        "villageTown": MessageLookupByLibrary.simpleMessage("Village / Town"),
+        "wardNo": MessageLookupByLibrary.simpleMessage("Ward No"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome Back!"),
         "yourEmail": MessageLookupByLibrary.simpleMessage("Your Email"),
         "yourName": MessageLookupByLibrary.simpleMessage("Your Name"),
