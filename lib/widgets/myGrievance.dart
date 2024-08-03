@@ -47,6 +47,12 @@ class GrievancePage extends StatelessWidget {
                     color: AppColors.hintTextColor,
                   ),
                 ),
+                SizedBox(width: 10.0), // Space between text and icon
+                Icon(
+                  Icons.do_not_disturb, // Replace with desired icon
+                  color: AppColors.hintTextColor,
+                  size: 36.0, // Adjust size as needed
+                ),
               ],
             ),
           ),
