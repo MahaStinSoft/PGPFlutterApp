@@ -50,8 +50,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "grievanceLocation":
             MessageLookupByLibrary.simpleMessage("பிரச்சினை இடம்"),
         "grievanceType": MessageLookupByLibrary.simpleMessage("பிரச்சினை வகை"),
-        "knowYourMunicipality": MessageLookupByLibrary.simpleMessage(
-            "உங்கள் மாகாணத்தை தெரிந்து கொள்ளுங்கள்"),
+        "knowYourMunicipality":
+            MessageLookupByLibrary.simpleMessage("நகராட்சி தகவல்கள்"),
         "login": MessageLookupByLibrary.simpleMessage("உள்நுழைய"),
         "loginGrievance": MessageLookupByLibrary.simpleMessage(
             "உங்கள் முறையீட்டை பகிர்ந்து கொள்ள உள்நுழையவும்!"),
@@ -90,10 +90,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "pleaseSelect": m1,
         "registeredGrievance":
             MessageLookupByLibrary.simpleMessage("பதிவு செய்யப்பட்ட புகார்"),
-        "resolvedGrievance": MessageLookupByLibrary.simpleMessage(
-            "முதற்கொண்டு தீர்க்கப்பட்ட புகார்"),
-        "selectGrievanceType": MessageLookupByLibrary.simpleMessage(
-            "பிரச்சினை வகையைத் தேர்ந்தெடுக்கவும்"),
+        "resolvedGrievance":
+            MessageLookupByLibrary.simpleMessage("குறை தீர்க்கப்பட்டது"),
+        "selectGrievanceType":
+            MessageLookupByLibrary.simpleMessage("வகை தேர்ந்தெடு"),
         "selectStreetName":
             MessageLookupByLibrary.simpleMessage("சாலையைத் தேர்ந்தெடுக்கவும்"),
         "selectTaluk":
