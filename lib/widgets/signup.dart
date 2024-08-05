@@ -288,7 +288,8 @@ class _SignupPageState extends State<SignupPage> {
                         TextFormField(
                             controller: _emailController,
                             decoration: AppInputDecorations.textFieldDecoration(
-                              hintText: S.of(context).email,
+                              // hintText: S.of(context).email,
+                              hintText: 'example@gmail.com',
                               borderColor: _emailError != null
                                   ? Colors.red
                                   : AppColors.hintTextColor,

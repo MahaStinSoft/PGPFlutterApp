@@ -104,8 +104,8 @@ class _LoginPageState extends State<LoginPage> {
                       child: TextFormField(
                         controller: _emailController,
                         decoration: AppInputDecorations.textFieldDecoration(
-                          hintText: S.of(context).yourEmail,
-                        ),
+                            // hintText: S.of(context).yourEmail,
+                            hintText: 'example@gmail.com'),
                         style: TextStyle(fontFamily: 'Poppins'),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
@@ -131,8 +131,8 @@ class _LoginPageState extends State<LoginPage> {
                         controller: _passwordController,
                         obscureText: true,
                         decoration: AppInputDecorations.textFieldDecoration(
-                          hintText: S.of(context).password,
-                        ),
+                            // hintText: S.of(context).password,
+                            hintText: '********'),
                         style: TextStyle(fontFamily: 'Poppins'),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
