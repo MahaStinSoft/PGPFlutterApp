@@ -210,17 +210,18 @@ class _LoginPageState extends State<LoginPage> {
                                   color: isEnglishSelected
                                       ? AppColors.primaryColor
                                       : AppColors.textDarkColor,
-                                  fontWeight: FontWeight.w600),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 12),
                             ),
                           ),
-                          const SizedBox(width: 16),
+                          const SizedBox(width: 8),
                           Text(
                             "|",
                             style: AppTextStyles.defaultStyle.copyWith(
                               color: AppColors.textDarkColor,
                             ),
                           ),
-                          const SizedBox(width: 16),
+                          const SizedBox(width: 8),
                           InkWell(
                             onTap: () {
                               Provider.of<LocaleProvider>(context,
@@ -236,7 +237,8 @@ class _LoginPageState extends State<LoginPage> {
                                   color: !isEnglishSelected
                                       ? AppColors.primaryColor
                                       : AppColors.textDarkColor,
-                                  fontWeight: FontWeight.w600),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 12),
                             ),
                           ),
                         ],
