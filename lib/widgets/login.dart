@@ -69,6 +69,7 @@ class _LoginPageState extends State<LoginPage> {
             child: SingleChildScrollView(
               child: Form(
                 key: _formKey,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -106,6 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                           hintText: S.of(context).yourEmail,
                         ),
                         style: TextStyle(fontFamily: 'Poppins'),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return S.of(context).emailRequired;
@@ -132,6 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                           hintText: S.of(context).password,
                         ),
                         style: TextStyle(fontFamily: 'Poppins'),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return S.of(context).passwordRequired;
@@ -204,7 +207,6 @@ class _LoginPageState extends State<LoginPage> {
                               });
                             },
                             child: Text(
-                              // S.of(context).english,
                               'English',
                               style: AppTextStyles.defaultStyle.copyWith(
                                   color: isEnglishSelected
