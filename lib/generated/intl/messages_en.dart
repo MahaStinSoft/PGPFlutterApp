@@ -38,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Don’t have an account? "),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailHint": MessageLookupByLibrary.simpleMessage("Enter your email"),
+        "emailRequired":
+            MessageLookupByLibrary.simpleMessage("Email is required"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "enterYourQuery":
             MessageLookupByLibrary.simpleMessage("Enter your query"),
@@ -70,6 +72,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordMustBeAtLeast6Characters":
             MessageLookupByLibrary.simpleMessage(
                 "Password must be at least 6 characters"),
+        "passwordRequired":
+            MessageLookupByLibrary.simpleMessage("Password is required"),
         "passwordsDoNotMatch":
             MessageLookupByLibrary.simpleMessage("Passwords do not match"),
         "pleaseConfirmYourPassword": MessageLookupByLibrary.simpleMessage(

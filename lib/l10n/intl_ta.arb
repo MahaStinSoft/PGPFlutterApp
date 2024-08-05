@@ -46,8 +46,8 @@
   "grievance": "பிரச்சினை",
   "enterYourQuery": "உங்கள் கேள்வியை உள்ளிடவும்",
   "grievanceLocation": "பிரச்சினை இடம்",
-  "taluk": "தலுக்",
-  "selectTaluk": "தலூகைத் தேர்ந்தெடுக்கவும்",
+  "taluk": "தாலுகா",
+  "selectTaluk": "தாலுக்கைத் தேர்ந்தெடுக்கவும்",
   "union": "அணி",
   "selectUnion": "அணியைத் தேர்ந்தெடுக்கவும்",
   "townPanchayat": "நகர பஞ்சாயத்து",
@@ -65,5 +65,7 @@
   "type2": "வகை2",
   "type3": "வகை3",
   "pleaseSelect": "{label} ஐத் தேர்ந்தெடுக்கவும்",
-  "pleaseEnter": "{label} ஐ உள்ளிடவும்"
+  "pleaseEnter": "{label} ஐ உள்ளிடவும்",
+  "emailRequired": "மின்னஞ்சல் தேவை",
+  "passwordRequired": "கடவுச்சொல் தேவை"
 }

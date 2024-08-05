@@ -65,5 +65,7 @@
   "type2": "Type2",
   "type3": "Type3",
   "pleaseSelect": "Please select a {label}",
-  "pleaseEnter": "Please enter {label}"
+  "pleaseEnter": "Please enter {label}",
+  "emailRequired": "Email is required",
+  "passwordRequired": "Password is required"
 }

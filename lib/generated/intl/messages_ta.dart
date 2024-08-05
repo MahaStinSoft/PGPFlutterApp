@@ -38,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("மின்னஞ்சல்"),
         "emailHint": MessageLookupByLibrary.simpleMessage(
             "உங்கள் மின்னஞ்சலை உள்ளிடவும்"),
+        "emailRequired":
+            MessageLookupByLibrary.simpleMessage("மின்னஞ்சல் தேவை"),
         "english": MessageLookupByLibrary.simpleMessage("ஆங்கிலம்"),
         "enterYourQuery":
             MessageLookupByLibrary.simpleMessage("உங்கள் கேள்வியை உள்ளிடவும்"),
@@ -70,6 +72,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordMustBeAtLeast6Characters":
             MessageLookupByLibrary.simpleMessage(
                 "கடவுச்சொல் குறைந்தது 6 எழுத்துகள் வேண்டும்"),
+        "passwordRequired":
+            MessageLookupByLibrary.simpleMessage("கடவுச்சொல் தேவை"),
         "passwordsDoNotMatch":
             MessageLookupByLibrary.simpleMessage("கடவுச்சொற்கள் பொருந்தவில்லை"),
         "pleaseConfirmYourPassword": MessageLookupByLibrary.simpleMessage(
@@ -96,8 +100,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("வகை தேர்ந்தெடு"),
         "selectStreetName":
             MessageLookupByLibrary.simpleMessage("சாலையைத் தேர்ந்தெடுக்கவும்"),
-        "selectTaluk":
-            MessageLookupByLibrary.simpleMessage("தலூகைத் தேர்ந்தெடுக்கவும்"),
+        "selectTaluk": MessageLookupByLibrary.simpleMessage(
+            "தாலுக்கைத் தேர்ந்தெடுக்கவும்"),
         "selectTownPanchayat": MessageLookupByLibrary.simpleMessage(
             "நகர பஞ்சாயத்தை தேர்ந்தெடுக்கவும்"),
         "selectUnion":
@@ -114,7 +118,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "submit": MessageLookupByLibrary.simpleMessage("சமர்ப்பிக்கவும்"),
         "submittedGrievance":
             MessageLookupByLibrary.simpleMessage("சமர்ப்பிக்கப்பட்ட புகார்"),
-        "taluk": MessageLookupByLibrary.simpleMessage("தலுக்"),
+        "taluk": MessageLookupByLibrary.simpleMessage("தாலுகா"),
         "tamil": MessageLookupByLibrary.simpleMessage("தமிழ்"),
         "townPanchayat": MessageLookupByLibrary.simpleMessage("நகர பஞ்சாயத்து"),
         "type1": MessageLookupByLibrary.simpleMessage("வகை1"),
