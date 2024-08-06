@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
-import 'package:flutterapp/LocaleProvider%20.dart';
+import 'package:flutterapp/LocaleProvider%20.dart'; // Adjust import as necessary
 import 'package:flutterapp/colors.dart';
 import 'package:flutterapp/styles.dart';
 import 'package:flutterapp/widgets/home.dart';
@@ -18,15 +18,48 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool isEnglishSelected = true;
+  bool _passwordVisible = false;
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  String? _emailErrorText;
+  String? _passwordErrorText;
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  void _validateFields() {
+    setState(() {
+      if (_emailController.text.isEmpty) {
+        _emailErrorText = S.of(context).emailRequired;
+      } else {
+        _emailErrorText = null;
+      }
+
+      if (_passwordController.text.isEmpty) {
+        _passwordErrorText = S.of(context).passwordRequired;
+      } else {
+        _passwordErrorText = null;
+      }
+    });
+  }
+
+  void _submit() {
+    _validateFields();
+
+    if (_formKey.currentState?.validate() ?? false) {
+      // Proceed with login logic
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ),
+      );
+    }
   }
 
   @override
@@ -36,6 +69,15 @@ class _LoginPageState extends State<LoginPage> {
       statusBarIconBrightness: Brightness.dark,
     ));
 
+    final screenSize = MediaQuery.of(context).size;
+    final screenHeight = screenSize.height;
+    final screenWidth = screenSize.width;
+
+    final logoHeight = screenHeight * 0.15;
+    final logoWidth = screenWidth * 0.30;
+    final buttonHeight = screenHeight * 0.07;
+    final buttonWidth = screenWidth * 0.80;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -43,172 +85,228 @@ class _LoginPageState extends State<LoginPage> {
             top: 0,
             left: 0,
             right: 0,
-            height: MediaQuery.of(context).size.height * 0.4,
+            height: screenHeight * 0.38,
             child: Image.asset(
               'assets/vector.png',
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
             ),
           ),
           Positioned(
-            top: 74,
+            top: screenHeight * 0.080,
             left: 0,
             right: 0,
             child: Center(
               child: Image.asset(
                 'assets/logo.png',
-                height: 130,
-                width: 115,
+                height: logoHeight,
+                width: logoWidth,
+                fit: BoxFit.contain,
               ),
             ),
           ),
           Positioned(
-            top: MediaQuery.of(context).size.height * 0.28 + 36 / 2,
+            top: screenHeight * 0.27,
             left: 0,
             right: 0,
             bottom: 0,
-            child: Column(
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Form(
-                      key: _formKey,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 32.0),
-                            child: Text(
-                              S.of(context).welcomeBack,
-                              style: AppTextStyles.headerStyle,
-                            ),
+                          Text(
+                            S.of(context).welcomeBack,
+                            style: AppTextStyles.headerStyle,
                           ),
                           const SizedBox(height: 3),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 32.0),
-                            child: Text(
-                              S.of(context).loginGrievance,
-                              style: AppTextStyles.titleStyle.copyWith(
-                                color: AppColors.iconsColor,
-                              ),
+                          Text(
+                            S.of(context).loginGrievance,
+                            style: AppTextStyles.titleStyle.copyWith(
+                              color: AppColors.iconsColor,
                             ),
                           ),
                           const SizedBox(height: 50),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 32.0),
-                            child: Text(
-                              S.of(context).yourEmail,
-                              style: AppTextStyles.labelStyle,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 32.0),
-                            child: TextFormField(
-                              controller: _emailController,
-                              decoration:
-                                  AppInputDecorations.textFieldDecoration(
-                                hintText: S.of(context).yourEmail,
-                              ),
-                              style: TextStyle(fontFamily: 'Poppins'),
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return S.of(context).emailRequired;
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 32.0),
-                            child: Text(
-                              S.of(context).password,
-                              style: AppTextStyles.labelStyle,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 32.0),
-                            child: TextFormField(
-                              controller: _passwordController,
-                              obscureText: true,
-                              decoration:
-                                  AppInputDecorations.textFieldDecoration(
-                                hintText: S.of(context).password,
-                              ),
-                              style: TextStyle(fontFamily: 'Poppins'),
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return S.of(context).passwordRequired;
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          const SizedBox(height: 2),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 32.0),
-                              child: TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  S.of(context).forgotPassword,
-                                  style: AppTextStyles.labelStyle.copyWith(
-                                    color: AppButtonStyles
-                                        .elevatedButtonStyle.backgroundColor
-                                        ?.resolve({}),
-                                  ),
+                          Form(
+                            key: _formKey,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  S.of(context).yourEmail,
+                                  style: AppTextStyles.labelStyle,
                                 ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 0.0),
-                          Container(
-                            margin:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 32.0),
-                              child: SizedBox(
-                                width: double.infinity,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    if (_formKey.currentState?.validate() ??
-                                        false) {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => HomePage(),
-                                        ),
-                                      );
-                                    }
-                                  },
-                                  child: Text(
-                                    S.of(context).login,
-                                    style: AppTextStyles.labelStyle.copyWith(
-                                      color: AppColors.textLightColor,
+                                const SizedBox(height: 8),
+                                TextFormField(
+                                  controller: _emailController,
+                                  decoration: InputDecoration(
+                                    hintText: 'example@gmail.com',
+                                    errorText: _emailErrorText,
+                                    filled: true,
+                                    fillColor: AppColors.textLightColor,
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: 10.0, horizontal: 10.0),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      borderSide: BorderSide(
+                                        color: AppColors.hintTextColor,
+                                        width: 1.0,
+                                      ),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      borderSide: BorderSide(
+                                        color: AppColors.hintTextColor,
+                                        width: 1.0,
+                                      ),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      borderSide: BorderSide(
+                                        color: AppColors.primaryColor,
+                                        width: 2.0,
+                                      ),
                                     ),
                                   ),
-                                  style: AppButtonStyles.elevatedButtonStyle,
+                                  style: const TextStyle(fontFamily: 'Poppins'),
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  onChanged: (value) {
+                                    _validateFields();
+                                  },
+                                  validator: (value) {
+                                    return _emailErrorText;
+                                  },
                                 ),
-                              ),
+                                const SizedBox(height: 10),
+                                Text(
+                                  S.of(context).password,
+                                  style: AppTextStyles.labelStyle,
+                                ),
+                                const SizedBox(height: 8),
+                                TextFormField(
+                                  controller: _passwordController,
+                                  obscureText: !_passwordVisible,
+                                  decoration: InputDecoration(
+                                    hintText: '********',
+                                    errorText: _passwordErrorText,
+                                    filled: true,
+                                    fillColor: AppColors.textLightColor,
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        color: AppColors.hintTextColor,
+                                        _passwordVisible
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          _passwordVisible = !_passwordVisible;
+                                        });
+                                      },
+                                    ),
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: 10.0, horizontal: 10.0),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      borderSide: BorderSide(
+                                        color: AppColors.hintTextColor,
+                                        width: 1.0,
+                                      ),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      borderSide: BorderSide(
+                                        color: AppColors.hintTextColor,
+                                        width: 1.0,
+                                      ),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      borderSide: BorderSide(
+                                        color: AppColors.hintTextColor,
+                                        width: 2.0,
+                                      ),
+                                    ),
+                                  ),
+                                  style: const TextStyle(fontFamily: 'Poppins'),
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  onChanged: (value) {
+                                    _validateFields();
+                                  },
+                                  validator: (value) {
+                                    return _passwordErrorText;
+                                  },
+                                ),
+                                const SizedBox(height: 2),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: TextButton(
+                                    onPressed: () {},
+                                    child: Text(
+                                      S.of(context).forgotPassword,
+                                      style: AppTextStyles.labelStyle.copyWith(
+                                        color: AppButtonStyles
+                                            .elevatedButtonStyle.backgroundColor
+                                            ?.resolve({}),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 0),
+                                SizedBox(
+                                  width: buttonWidth,
+                                  height: buttonHeight,
+                                  child: ElevatedButton(
+                                    onPressed: _submit,
+                                    child: Text(
+                                      S.of(context).login,
+                                      style: AppTextStyles.labelStyle.copyWith(
+                                        color: AppColors.textLightColor,
+                                      ),
+                                    ),
+                                    style: AppButtonStyles.elevatedButtonStyle,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          const SizedBox(height: 50),
-                          Center(
+                          // const SizedBox(height: 30),
+                          // Padding(
+                          //   padding: const EdgeInsets.only(bottom: 20.0),
+                          //   child: RichText(
+                          //     text: TextSpan(
+                          //       children: [
+                          //         TextSpan(
+                          //           text: S.of(context).dontHaveAccount,
+                          //           style: AppTextStyles.titleStyle,
+                          //         ),
+                          //         TextSpan(
+                          //           text: S.of(context).signUp,
+                          //           style: AppTextStyles.titleStyle.copyWith(
+                          //             color: AppColors.primaryColor,
+                          //           ),
+                          //           recognizer: TapGestureRecognizer()
+                          //             ..onTap = () {
+                          //               Navigator.push(
+                          //                 context,
+                          //                 MaterialPageRoute(
+                          //                   builder: (context) => SignupPage(),
+                          //                 ),
+                          //               );
+                          //             },
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
+                          const SizedBox(height: 30), // Added space here
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 16.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -216,7 +314,7 @@ class _LoginPageState extends State<LoginPage> {
                                   onTap: () {
                                     Provider.of<LocaleProvider>(context,
                                             listen: false)
-                                        .setLocale(Locale('en'));
+                                        .setLocale(const Locale('en'));
                                     setState(() {
                                       isEnglishSelected = true;
                                     });
@@ -234,21 +332,21 @@ class _LoginPageState extends State<LoginPage> {
                                 Text(
                                   "|",
                                   style: AppTextStyles.labelStyle.copyWith(
-                                    color: AppColors.textDarkColor,
-                                  ),
+                                      color: AppColors.textDarkColor,
+                                      fontWeight: FontWeight.normal),
                                 ),
                                 const SizedBox(width: 8),
                                 InkWell(
                                   onTap: () {
                                     Provider.of<LocaleProvider>(context,
                                             listen: false)
-                                        .setLocale(Locale('ta'));
+                                        .setLocale(const Locale('ta'));
                                     setState(() {
                                       isEnglishSelected = false;
                                     });
                                   },
                                   child: Text(
-                                    S.of(context).tamil,
+                                    'தமிழ்',
                                     style: AppTextStyles.labelStyle.copyWith(
                                         color: !isEnglishSelected
                                             ? AppColors.primaryColor
@@ -259,41 +357,40 @@ class _LoginPageState extends State<LoginPage> {
                               ],
                             ),
                           ),
-                          const SizedBox(height: 60),
                         ],
                       ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: RichText(
-                    text: TextSpan(
-                      text: S.of(context).dontHaveAccount,
-                      style: AppTextStyles.labelStyle,
-                      children: [
-                        TextSpan(
-                          text: S.of(context).signUp,
-                          style: AppTextStyles.labelStyle.copyWith(
-                            color: AppButtonStyles
-                                .elevatedButtonStyle.backgroundColor
-                                ?.resolve({}),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20.0),
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: S.of(context).dontHaveAccount,
+                            style: AppTextStyles.labelStyle,
                           ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SignupPage(),
-                                ),
-                              );
-                            },
-                        ),
-                      ],
+                          TextSpan(
+                            text: S.of(context).signUp,
+                            style: AppTextStyles.labelStyle.copyWith(
+                              color: AppColors.primaryColor,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SignupPage(),
+                                  ),
+                                );
+                              },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
