@@ -165,35 +165,26 @@ class _GrievanceFormScreenState extends State<GrievanceFormScreen> {
                   ),
                   const SizedBox(height: 10),
                   Container(
-                    margin:
-                        EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: screenWidth * 0.02, vertical: 15.0),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState?.validate() ?? false) {
-                              // Process the form submission
-                            }
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 8.0,
-                                horizontal: 30.0), // Increase padding here
-                            child: Text(
-                              S.of(context).submit,
-                              style: AppTextStyles.defaultStyle.copyWith(
-                                color: AppColors.textLightColor,
-                                fontWeight: FontWeight.w600,
-                                // fontSize:
-                                //     screenWidth * 0.05, // Responsive font size
-                              ),
-                            ),
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0, vertical: 0.0),
+                    width: double.infinity,
+                    child: SizedBox(
+                      height: 60, // Set the desired height here
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState?.validate() ?? false) {
+                            // Process the form submission
+                          }
+                        },
+                        child: Text(
+                          S.of(context).submit,
+                          style: AppTextStyles.defaultStyle.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
                           ),
-                          style: AppButtonStyles.elevatedButtonStyle,
                         ),
+                        style: AppButtonStyles.elevatedButtonStyle,
                       ),
                     ),
                   ),

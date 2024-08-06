@@ -307,16 +307,19 @@ class _SignupPageState extends State<SignupPage> {
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 10),
                           width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: _submitForm,
-                            child: Text(
-                              S.of(context).signUp,
-                              style: AppTextStyles.defaultStyle.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
+                          child: SizedBox(
+                            height: 50, // Set the desired height here
+                            child: ElevatedButton(
+                              onPressed: _submitForm,
+                              child: Text(
+                                S.of(context).signUp,
+                                style: AppTextStyles.defaultStyle.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
+                              style: AppButtonStyles.elevatedButtonStyle,
                             ),
-                            style: AppButtonStyles.elevatedButtonStyle,
                           ),
                         ),
                         const SizedBox(height: 10),
