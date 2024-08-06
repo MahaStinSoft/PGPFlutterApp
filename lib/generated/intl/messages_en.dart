@@ -111,7 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectVillageTown":
             MessageLookupByLibrary.simpleMessage("Select Village / Town"),
         "selectWardNo": MessageLookupByLibrary.simpleMessage("Select Ward No"),
-        "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
+        "signIn": MessageLookupByLibrary.simpleMessage("Login"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "streetName": MessageLookupByLibrary.simpleMessage("Street Name"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),

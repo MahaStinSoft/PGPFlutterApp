@@ -108,10 +108,8 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-    ));
+    final deviceWidth = MediaQuery.of(context).size.width;
+    final deviceHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: Stack(
@@ -120,7 +118,7 @@ class _SignupPageState extends State<SignupPage> {
             top: 0,
             left: 0,
             right: 0,
-            height: MediaQuery.of(context).size.height * 0.45,
+            height: deviceHeight * 0.38,
             child: Image.asset(
               'assets/vector.png',
               fit: BoxFit.fill,
@@ -131,7 +129,11 @@ class _SignupPageState extends State<SignupPage> {
             child: Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.fromLTRB(32.0, 79.0, 32.0, 20.0),
+                  padding: EdgeInsets.fromLTRB(
+                      deviceWidth * 0.08,
+                      deviceHeight * 0.08,
+                      deviceWidth * 0.01,
+                      deviceHeight * 0.02),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -140,22 +142,25 @@ class _SignupPageState extends State<SignupPage> {
                         children: [
                           Text(
                             S.of(context).signUp,
-                            style: AppTextStyles.headerStyle,
+                            style: AppTextStyles.headerStyle.copyWith(
+                              fontSize: deviceWidth * 0.06,
+                            ),
                           ),
-                          const SizedBox(height: 40),
+                          SizedBox(height: deviceHeight * 0.05),
                         ],
                       ),
                       Image.asset(
                         'assets/logo.png',
-                        height: 100,
-                        width: 100,
+                        height: deviceHeight * 0.1,
+                        width: deviceWidth * 0.38,
                       ),
                     ],
                   ),
                 ),
                 Expanded(
                   child: SingleChildScrollView(
-                    padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: deviceWidth * 0.08),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -166,21 +171,23 @@ class _SignupPageState extends State<SignupPage> {
                           errorText: _nameError,
                           onChanged: (value) => _validateField('name'),
                         ),
-                        const SizedBox(height: 10),
+                        SizedBox(height: deviceHeight * 0.02),
                         Text(S.of(context).mobileNo,
-                            style: AppTextStyles.labelStyle),
-                        const SizedBox(height: 8),
+                            style: AppTextStyles.labelStyle.copyWith(
+                              fontSize: deviceWidth * 0.04,
+                            )),
+                        SizedBox(height: deviceHeight * 0.01),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              height: 50,
+                              height: deviceHeight * 0.06,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
-                                    width: 60,
-                                    height: 47,
+                                    width: deviceWidth * 0.15,
+                                    height: deviceHeight * 0.06,
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       border: Border.all(
@@ -195,7 +202,7 @@ class _SignupPageState extends State<SignupPage> {
                                         hintText: "+91",
                                         hintStyle: AppTextStyles.textInputStyle
                                             .copyWith(
-                                                color: AppColors.hintTextColor),
+                                                color: AppColors.textDarkColor),
                                         border: InputBorder.none,
                                         contentPadding:
                                             const EdgeInsets.symmetric(
@@ -206,10 +213,10 @@ class _SignupPageState extends State<SignupPage> {
                                       readOnly: true,
                                     ),
                                   ),
-                                  const SizedBox(width: 10),
+                                  SizedBox(width: deviceWidth * 0.02),
                                   Expanded(
                                     child: Container(
-                                      height: 48,
+                                      height: deviceHeight * 0.06,
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         border: Border.all(
@@ -255,14 +262,14 @@ class _SignupPageState extends State<SignupPage> {
                                 child: Text(
                                   _phoneError!,
                                   style: TextStyle(
-                                    color: Color.fromARGB(255, 184, 19, 7),
+                                    color: Colors.red,
                                     fontSize: 12,
                                   ),
                                 ),
                               ),
                           ],
                         ),
-                        const SizedBox(height: 10),
+                        SizedBox(height: deviceHeight * 0.02),
                         CustomTextFormField(
                           controller: _emailController,
                           hintText: 'example@gmail.com',
@@ -270,7 +277,7 @@ class _SignupPageState extends State<SignupPage> {
                           errorText: _emailError,
                           onChanged: (value) => _validateField('email'),
                         ),
-                        const SizedBox(height: 10),
+                        SizedBox(height: deviceHeight * 0.02),
                         CustomTextFormField(
                           controller: _passwordController,
                           hintText: '*********',
@@ -285,10 +292,10 @@ class _SignupPageState extends State<SignupPage> {
                           showToggleIcon: true,
                           onChanged: (value) => _validateField('password'),
                         ),
-                        const SizedBox(height: 10),
+                        SizedBox(height: deviceHeight * 0.02),
                         CustomTextFormField(
                           controller: _confirmPasswordController,
-                          hintText: '********',
+                          hintText: '*********',
                           labelText: S.of(context).confirmPassword,
                           errorText: _confirmPasswordError,
                           obscureText: !_confirmPasswordVisible,
@@ -302,59 +309,53 @@ class _SignupPageState extends State<SignupPage> {
                           onChanged: (value) =>
                               _validateField('confirmPassword'),
                         ),
-                        const SizedBox(height: 20),
-                        // Signup Button
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          width: double.infinity,
-                          child: SizedBox(
-                            height: 50, // Set the desired height here
-                            child: ElevatedButton(
-                              onPressed: _submitForm,
-                              child: Text(
-                                S.of(context).signUp,
-                                style: AppTextStyles.defaultStyle.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                        SizedBox(height: deviceHeight * 0.04),
+                        Center(
+                          child: ElevatedButton(
+                            onPressed: _submitForm,
+                            style: ElevatedButton.styleFrom(
+                              minimumSize:
+                                  Size(deviceWidth * 0.8, deviceHeight * 0.06),
+                              backgroundColor: AppColors.primaryColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
                               ),
-                              style: AppButtonStyles.elevatedButtonStyle,
+                            ),
+                            child: Text(
+                              S.of(context).signUp,
+                              style: AppTextStyles.labelStyle
+                                  .copyWith(color: AppColors.textLightColor),
                             ),
                           ),
                         ),
-                        const SizedBox(height: 10),
                       ],
                     ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-                    child: RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: S.of(context).alreadyHaveAnAccount + ' ',
-                            style: AppTextStyles.labelStyle,
+                // SizedBox(height: deviceHeight * 0.05),
+                Center(
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: S.of(context).alreadyHaveAnAccount,
+                          style: AppTextStyles.labelStyle,
+                        ),
+                        TextSpan(
+                          text: ' ${S.of(context).signIn}',
+                          style: AppTextStyles.labelStyle.copyWith(
+                            color: AppColors.primaryColor,
                           ),
-                          TextSpan(
-                            text: S.of(context).signIn,
-                            style: AppTextStyles.labelStyle.copyWith(
-                              color: AppColors.primaryColor,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.pop(context);
-                              },
-                          ),
-                        ],
-                      ),
-                      textAlign: TextAlign.center,
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.pop(context);
+                            },
+                        ),
+                      ],
                     ),
                   ),
                 ),
+                const SizedBox(height: 20),
               ],
             ),
           ),
