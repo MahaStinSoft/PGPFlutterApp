@@ -37,156 +37,171 @@ class _GrievanceFormScreenState extends State<GrievanceFormScreen> {
           },
         ),
         backgroundColor: AppColors.secondaryColor,
-        toolbarHeight: 80.0,
+        toolbarHeight: 65.0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            children: <Widget>[
-              _buildDropdownField(
-                label: S.of(context).grievanceType,
-                value: grievanceType,
-                hint: S.of(context).selectGrievanceType,
-                items: [
-                  S.of(context).type1,
-                  S.of(context).type2,
-                  S.of(context).type3
-                ],
-                onChanged: (newValue) {
-                  setState(() {
-                    grievanceType = newValue;
-                  });
-                },
-              ),
-              _buildTextField(
-                label: S.of(context).grievance,
-                hint: S.of(context).enterYourQuery,
-                maxLines: 4,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: Text(
-                  S.of(context).grievanceLocation,
-                  style: AppTextStyles.defaultStyle
-                      .copyWith(fontWeight: FontWeight.w600),
-                ),
-              ),
-              _buildDropdownField(
-                label: S.of(context).taluk,
-                value: taluk,
-                hint: S.of(context).selectTaluk,
-                items: ['Taluk 1', 'Taluk 2', 'Taluk 3'],
-                onChanged: (newValue) {
-                  setState(() {
-                    taluk = newValue;
-                  });
-                },
-              ),
-              _buildDropdownField(
-                label: S.of(context).union,
-                value: union,
-                hint: S.of(context).selectUnion,
-                items: ['Union 1', 'Union 2', 'Union 3'],
-                onChanged: (newValue) {
-                  setState(() {
-                    union = newValue;
-                  });
-                },
-              ),
-              _buildDropdownField(
-                label: S.of(context).townPanchayat,
-                value: townPanchayat,
-                hint: S.of(context).selectTownPanchayat,
-                items: [
-                  'Town Panchayat 1',
-                  'Town Panchayat 2',
-                  'Town Panchayat 3'
-                ],
-                onChanged: (newValue) {
-                  setState(() {
-                    townPanchayat = newValue;
-                  });
-                },
-              ),
-              _buildDropdownField(
-                label: S.of(context).villagePanchayat,
-                value: villagePanchayat,
-                hint: S.of(context).selectVillagePanchayat,
-                items: [
-                  'Village Panchayat 1',
-                  'Village Panchayat 2',
-                  'Village Panchayat 3'
-                ],
-                onChanged: (newValue) {
-                  setState(() {
-                    villagePanchayat = newValue;
-                  });
-                },
-              ),
-              _buildDropdownField(
-                label: S.of(context).villageTown,
-                value: villageTown,
-                hint: S.of(context).selectVillageTown,
-                items: ['Village 1', 'Town 1', 'Village 2', 'Town 2'],
-                onChanged: (newValue) {
-                  setState(() {
-                    villageTown = newValue;
-                  });
-                },
-              ),
-              _buildDropdownField(
-                label: S.of(context).wardNo,
-                value: wardNo,
-                hint: S.of(context).selectWardNo,
-                items: ['Ward 1', 'Ward 2', 'Ward 3'],
-                onChanged: (newValue) {
-                  setState(() {
-                    wardNo = newValue;
-                  });
-                },
-              ),
-              _buildDropdownField(
-                label: S.of(context).streetName,
-                value: streetName,
-                hint: S.of(context).selectStreetName,
-                items: ['Street 1', 'Street 2', 'Street 3'],
-                onChanged: (newValue) {
-                  setState(() {
-                    streetName = newValue;
-                  });
-                },
-              ),
-              const SizedBox(height: 10),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 10.0, vertical: 10.0),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          // Process the form submission
-                        }
-                      },
-                      child: Text(
-                        S.of(context).submit,
-                        style: AppTextStyles.defaultStyle.copyWith(
-                          color: AppColors.textLightColor,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      style: AppButtonStyles.elevatedButtonStyle,
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final screenWidth = constraints.maxWidth;
+
+          return Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: screenWidth * 0.08, vertical: 30.0),
+            child: Form(
+              key: _formKey,
+              child: ListView(
+                children: <Widget>[
+                  _buildDropdownField(
+                    label: S.of(context).grievanceType,
+                    value: grievanceType,
+                    hint: S.of(context).selectGrievanceType,
+                    items: [
+                      S.of(context).type1,
+                      S.of(context).type2,
+                      S.of(context).type3
+                    ],
+                    onChanged: (newValue) {
+                      setState(() {
+                        grievanceType = newValue;
+                      });
+                    },
+                  ),
+                  _buildTextField(
+                    label: S.of(context).grievance,
+                    hint: S.of(context).enterYourQuery,
+                    maxLines: 4,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: Text(
+                      S.of(context).grievanceLocation,
+                      style: AppTextStyles.defaultStyle
+                          .copyWith(fontWeight: FontWeight.w600, fontSize: 18),
                     ),
                   ),
-                ),
+                  _buildDropdownField(
+                    label: S.of(context).taluk,
+                    value: taluk,
+                    hint: S.of(context).selectTaluk,
+                    items: ['Taluk 1', 'Taluk 2', 'Taluk 3'],
+                    onChanged: (newValue) {
+                      setState(() {
+                        taluk = newValue;
+                      });
+                    },
+                  ),
+                  _buildDropdownField(
+                    label: S.of(context).union,
+                    value: union,
+                    hint: S.of(context).selectUnion,
+                    items: ['Union 1', 'Union 2', 'Union 3'],
+                    onChanged: (newValue) {
+                      setState(() {
+                        union = newValue;
+                      });
+                    },
+                  ),
+                  _buildDropdownField(
+                    label: S.of(context).townPanchayat,
+                    value: townPanchayat,
+                    hint: S.of(context).selectTownPanchayat,
+                    items: [
+                      'Town Panchayat 1',
+                      'Town Panchayat 2',
+                      'Town Panchayat 3'
+                    ],
+                    onChanged: (newValue) {
+                      setState(() {
+                        townPanchayat = newValue;
+                      });
+                    },
+                  ),
+                  _buildDropdownField(
+                    label: S.of(context).villagePanchayat,
+                    value: villagePanchayat,
+                    hint: S.of(context).selectVillagePanchayat,
+                    items: [
+                      'Village Panchayat 1',
+                      'Village Panchayat 2',
+                      'Village Panchayat 3'
+                    ],
+                    onChanged: (newValue) {
+                      setState(() {
+                        villagePanchayat = newValue;
+                      });
+                    },
+                  ),
+                  _buildDropdownField(
+                    label: S.of(context).villageTown,
+                    value: villageTown,
+                    hint: S.of(context).selectVillageTown,
+                    items: ['Village 1', 'Town 1', 'Village 2', 'Town 2'],
+                    onChanged: (newValue) {
+                      setState(() {
+                        villageTown = newValue;
+                      });
+                    },
+                  ),
+                  _buildDropdownField(
+                    label: S.of(context).wardNo,
+                    value: wardNo,
+                    hint: S.of(context).selectWardNo,
+                    items: ['Ward 1', 'Ward 2', 'Ward 3'],
+                    onChanged: (newValue) {
+                      setState(() {
+                        wardNo = newValue;
+                      });
+                    },
+                  ),
+                  _buildDropdownField(
+                    label: S.of(context).streetName,
+                    value: streetName,
+                    hint: S.of(context).selectStreetName,
+                    items: ['Street 1', 'Street 2', 'Street 3'],
+                    onChanged: (newValue) {
+                      setState(() {
+                        streetName = newValue;
+                      });
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  Container(
+                    margin:
+                        EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: screenWidth * 0.02, vertical: 15.0),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState?.validate() ?? false) {
+                              // Process the form submission
+                            }
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 8.0,
+                                horizontal: 30.0), // Increase padding here
+                            child: Text(
+                              S.of(context).submit,
+                              style: AppTextStyles.defaultStyle.copyWith(
+                                color: AppColors.textLightColor,
+                                fontWeight: FontWeight.w600,
+                                // fontSize:
+                                //     screenWidth * 0.05, // Responsive font size
+                              ),
+                            ),
+                          ),
+                          style: AppButtonStyles.elevatedButtonStyle,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
