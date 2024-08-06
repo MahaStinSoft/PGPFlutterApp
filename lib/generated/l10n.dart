@@ -170,6 +170,16 @@ class S {
     );
   }
 
+  /// `Please enter valid name`
+  String get PleaseEnterValidName {
+    return Intl.message(
+      'Please enter valid name',
+      name: 'PleaseEnterValidName',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Please enter your mobile number`
   String get pleaseEnterYourMobileNumber {
     return Intl.message(

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutterapp/colors.dart';
 import 'package:flutterapp/styles.dart';
 import 'package:flutterapp/generated/l10n.dart';
+import 'package:flutterapp/widgets/common/custom_textformfield.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -56,8 +57,11 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   String? _validateName(String value) {
+    final regex = RegExp(r'^[a-zA-Z\s]+$');
     if (value.isEmpty) {
       return S.of(context).pleaseEnterYourName;
+    } else if (!regex.hasMatch(value)) {
+      return S.of(context).PleaseEnterValidName;
     }
     return null;
   }
@@ -119,7 +123,7 @@ class _SignupPageState extends State<SignupPage> {
             height: MediaQuery.of(context).size.height * 0.45,
             child: Image.asset(
               'assets/vector.png',
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
             ),
           ),
           Form(
@@ -155,36 +159,13 @@ class _SignupPageState extends State<SignupPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(S.of(context).yourName,
-                            style: AppTextStyles.labelStyle),
-                        const SizedBox(height: 8),
-                        TextFormField(
-                            controller: _nameController,
-                            decoration: AppInputDecorations.textFieldDecoration(
-                              hintText: S.of(context).yourName,
-                              borderColor: _nameError != null
-                                  ? Colors.red
-                                  : AppColors.hintTextColor,
-                            ),
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'[a-zA-Z\s]'))
-                            ],
-                            onChanged: (value) => _validateField('name'),
-                            validator: (_) => _nameError,
-                            style: TextStyle(fontFamily: 'Poppins')),
-                        if (_nameError != null)
-                          Padding(
-                            padding:
-                                const EdgeInsets.fromLTRB(10.0, 8.0, 0.0, 0.0),
-                            child: Text(
-                              _nameError!,
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 184, 19, 7),
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
+                        CustomTextFormField(
+                          controller: _nameController,
+                          hintText: S.of(context).yourName,
+                          labelText: S.of(context).yourName,
+                          errorText: _nameError,
+                          onChanged: (value) => _validateField('name'),
+                        ),
                         const SizedBox(height: 10),
                         Text(S.of(context).mobileNo,
                             style: AppTextStyles.labelStyle),
@@ -282,124 +263,45 @@ class _SignupPageState extends State<SignupPage> {
                           ],
                         ),
                         const SizedBox(height: 10),
-                        Text(S.of(context).email,
-                            style: AppTextStyles.labelStyle),
-                        const SizedBox(height: 8),
-                        TextFormField(
-                            controller: _emailController,
-                            decoration: AppInputDecorations.textFieldDecoration(
-                              // hintText: S.of(context).email,
-                              hintText: 'example@gmail.com',
-                              borderColor: _emailError != null
-                                  ? Colors.red
-                                  : AppColors.hintTextColor,
-                            ),
-                            keyboardType: TextInputType.emailAddress,
-                            onChanged: (value) => _validateField('email'),
-                            validator: (_) => _emailError,
-                            style: TextStyle(fontFamily: 'Poppins')),
-                        if (_emailError != null)
-                          Padding(
-                            padding:
-                                const EdgeInsets.fromLTRB(10.0, 8.0, 0.0, 0.0),
-                            child: Text(
-                              _emailError!,
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 184, 19, 7),
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
-                        const SizedBox(height: 10),
-                        Text(S.of(context).password,
-                            style: AppTextStyles.labelStyle),
-                        const SizedBox(height: 8),
-                        TextFormField(
-                          controller: _passwordController,
-                          decoration: AppInputDecorations.textFieldDecoration(
-                            hintText: '*********',
-                            isPassword: true,
-                            borderColor: _passwordError != null
-                                ? Colors.red
-                                : AppColors.hintTextColor,
-                          ).copyWith(
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                color: AppColors.hintTextColor,
-                                _passwordVisible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _passwordVisible = !_passwordVisible;
-                                });
-                              },
-                            ),
-                          ),
-                          obscureText: !_passwordVisible,
-                          onChanged: (value) => _validateField('password'),
-                          validator: (_) => _passwordError,
-                          style: TextStyle(fontFamily: 'Poppins'),
+                        CustomTextFormField(
+                          controller: _emailController,
+                          hintText: 'example@gmail.com',
+                          labelText: S.of(context).email,
+                          errorText: _emailError,
+                          onChanged: (value) => _validateField('email'),
                         ),
-                        if (_passwordError != null)
-                          Padding(
-                            padding:
-                                const EdgeInsets.fromLTRB(10.0, 8.0, 0.0, 0.0),
-                            child: Text(
-                              _passwordError!,
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 184, 19, 7),
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
                         const SizedBox(height: 10),
-                        Text(S.of(context).confirmPassword,
-                            style: AppTextStyles.labelStyle),
-                        const SizedBox(height: 8),
-                        TextFormField(
+                        CustomTextFormField(
+                          controller: _passwordController,
+                          hintText: '*********',
+                          labelText: S.of(context).password,
+                          errorText: _passwordError,
+                          obscureText: !_passwordVisible,
+                          togglePasswordVisibility: () {
+                            setState(() {
+                              _passwordVisible = !_passwordVisible;
+                            });
+                          },
+                          showToggleIcon: true,
+                          onChanged: (value) => _validateField('password'),
+                        ),
+                        const SizedBox(height: 10),
+                        CustomTextFormField(
                           controller: _confirmPasswordController,
-                          decoration: AppInputDecorations.textFieldDecoration(
-                            hintText: '********',
-                            isPassword: true,
-                            borderColor: _passwordError != null
-                                ? Colors.red
-                                : AppColors.hintTextColor,
-                          ).copyWith(
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                color: AppColors.hintTextColor,
-                                _confirmPasswordVisible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _confirmPasswordVisible =
-                                      !_confirmPasswordVisible;
-                                });
-                              },
-                            ),
-                          ),
+                          hintText: '********',
+                          labelText: S.of(context).confirmPassword,
+                          errorText: _confirmPasswordError,
                           obscureText: !_confirmPasswordVisible,
+                          togglePasswordVisibility: () {
+                            setState(() {
+                              _confirmPasswordVisible =
+                                  !_confirmPasswordVisible;
+                            });
+                          },
+                          showToggleIcon: true,
                           onChanged: (value) =>
                               _validateField('confirmPassword'),
-                          validator: (_) => _confirmPasswordError,
-                          style: TextStyle(fontFamily: 'Poppins'),
                         ),
-                        if (_confirmPasswordError != null)
-                          Padding(
-                            padding:
-                                const EdgeInsets.fromLTRB(10.0, 8.0, 0.0, 0.0),
-                            child: Text(
-                              _confirmPasswordError!,
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 184, 19, 7),
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
                         const SizedBox(height: 20),
                         // Signup Button
                         Container(
@@ -441,7 +343,6 @@ class _SignupPageState extends State<SignupPage> {
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                // Handle tap here
                                 Navigator.pop(context);
                               },
                           ),

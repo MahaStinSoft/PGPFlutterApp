@@ -86,7 +86,7 @@ class AppInputDecorations {
 class AppButtonStyles {
   static ButtonStyle elevatedButtonStyle = ElevatedButton.styleFrom(
     backgroundColor: AppColors.primaryColor,
-    padding: const EdgeInsets.symmetric(vertical: 13),
+    padding: const EdgeInsets.symmetric(vertical: 10),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(20),
     ),

@@ -26,6 +26,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "PleaseEnterValidName": MessageLookupByLibrary.simpleMessage(
+            "தயவுசெய்து சரியான பெயரை உள்ளிடவும்"),
         "alreadyHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("ஏற்கனவே ஒரு கணக்கு உள்ளதா?"),
         "appTitle": MessageLookupByLibrary.simpleMessage("பொது புகார் மையம்"),

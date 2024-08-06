@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:flutterapp/LocaleProvider%20.dart'; // Adjust import as necessary
 import 'package:flutterapp/colors.dart';
 import 'package:flutterapp/styles.dart';
+import 'package:flutterapp/widgets/common/custom_textformfield.dart';
 import 'package:flutterapp/widgets/home.dart';
 import 'package:flutterapp/widgets/signup.dart';
 import 'package:flutterapp/generated/l10n.dart';
-import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -34,25 +35,26 @@ class _LoginPageState extends State<LoginPage> {
 
   void _validateFields() {
     setState(() {
-      if (_emailController.text.isEmpty) {
-        _emailErrorText = S.of(context).emailRequired;
-      } else {
-        _emailErrorText = null;
-      }
+      _emailErrorText =
+          _emailController.text.isEmpty ? S.of(context).emailRequired : null;
+      _passwordErrorText = _passwordController.text.isEmpty
+          ? S.of(context).passwordRequired
+          : null;
+    });
+  }
 
-      if (_passwordController.text.isEmpty) {
-        _passwordErrorText = S.of(context).passwordRequired;
-      } else {
-        _passwordErrorText = null;
-      }
+  void _resetValidationErrors() {
+    setState(() {
+      _emailErrorText = null;
+      _passwordErrorText = null;
     });
   }
 
   void _submit() {
     _validateFields();
 
-    if (_formKey.currentState?.validate() ?? false) {
-      // Proceed with login logic
+    if (_emailErrorText == null && _passwordErrorText == null) {
+      // Proceed with login logic if no validation errors
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -112,6 +114,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32.0),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: SingleChildScrollView(
@@ -135,112 +138,27 @@ class _LoginPageState extends State<LoginPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  S.of(context).yourEmail,
-                                  style: AppTextStyles.labelStyle,
-                                ),
-                                const SizedBox(height: 8),
-                                TextFormField(
+                                CustomTextFormField(
                                   controller: _emailController,
-                                  decoration: InputDecoration(
-                                    hintText: 'example@gmail.com',
-                                    errorText: _emailErrorText,
-                                    filled: true,
-                                    fillColor: AppColors.textLightColor,
-                                    contentPadding: EdgeInsets.symmetric(
-                                        vertical: 10.0, horizontal: 10.0),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      borderSide: BorderSide(
-                                        color: AppColors.hintTextColor,
-                                        width: 1.0,
-                                      ),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      borderSide: BorderSide(
-                                        color: AppColors.hintTextColor,
-                                        width: 1.0,
-                                      ),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      borderSide: BorderSide(
-                                        color: AppColors.primaryColor,
-                                        width: 2.0,
-                                      ),
-                                    ),
-                                  ),
-                                  style: const TextStyle(fontFamily: 'Poppins'),
-                                  autovalidateMode:
-                                      AutovalidateMode.onUserInteraction,
-                                  onChanged: (value) {
-                                    _validateFields();
-                                  },
-                                  validator: (value) {
-                                    return _emailErrorText;
-                                  },
+                                  hintText: 'example@gmail.com',
+                                  labelText: S.of(context).yourEmail,
+                                  errorText: _emailErrorText,
+                                  onChanged: (value) => _validateFields(),
                                 ),
                                 const SizedBox(height: 10),
-                                Text(
-                                  S.of(context).password,
-                                  style: AppTextStyles.labelStyle,
-                                ),
-                                const SizedBox(height: 8),
-                                TextFormField(
+                                CustomTextFormField(
                                   controller: _passwordController,
+                                  hintText: '********',
+                                  labelText: S.of(context).password,
+                                  errorText: _passwordErrorText,
                                   obscureText: !_passwordVisible,
-                                  decoration: InputDecoration(
-                                    hintText: '********',
-                                    errorText: _passwordErrorText,
-                                    filled: true,
-                                    fillColor: AppColors.textLightColor,
-                                    suffixIcon: IconButton(
-                                      icon: Icon(
-                                        color: AppColors.hintTextColor,
-                                        _passwordVisible
-                                            ? Icons.visibility
-                                            : Icons.visibility_off,
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          _passwordVisible = !_passwordVisible;
-                                        });
-                                      },
-                                    ),
-                                    contentPadding: EdgeInsets.symmetric(
-                                        vertical: 10.0, horizontal: 10.0),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      borderSide: BorderSide(
-                                        color: AppColors.hintTextColor,
-                                        width: 1.0,
-                                      ),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      borderSide: BorderSide(
-                                        color: AppColors.hintTextColor,
-                                        width: 1.0,
-                                      ),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      borderSide: BorderSide(
-                                        color: AppColors.hintTextColor,
-                                        width: 2.0,
-                                      ),
-                                    ),
-                                  ),
-                                  style: const TextStyle(fontFamily: 'Poppins'),
-                                  autovalidateMode:
-                                      AutovalidateMode.onUserInteraction,
-                                  onChanged: (value) {
-                                    _validateFields();
+                                  showToggleIcon: true,
+                                  togglePasswordVisibility: () {
+                                    setState(() {
+                                      _passwordVisible = !_passwordVisible;
+                                    });
                                   },
-                                  validator: (value) {
-                                    return _passwordErrorText;
-                                  },
+                                  onChanged: (value) => _validateFields(),
                                 ),
                                 const SizedBox(height: 2),
                                 Align(
@@ -275,36 +193,7 @@ class _LoginPageState extends State<LoginPage> {
                               ],
                             ),
                           ),
-                          // const SizedBox(height: 30),
-                          // Padding(
-                          //   padding: const EdgeInsets.only(bottom: 20.0),
-                          //   child: RichText(
-                          //     text: TextSpan(
-                          //       children: [
-                          //         TextSpan(
-                          //           text: S.of(context).dontHaveAccount,
-                          //           style: AppTextStyles.titleStyle,
-                          //         ),
-                          //         TextSpan(
-                          //           text: S.of(context).signUp,
-                          //           style: AppTextStyles.titleStyle.copyWith(
-                          //             color: AppColors.primaryColor,
-                          //           ),
-                          //           recognizer: TapGestureRecognizer()
-                          //             ..onTap = () {
-                          //               Navigator.push(
-                          //                 context,
-                          //                 MaterialPageRoute(
-                          //                   builder: (context) => SignupPage(),
-                          //                 ),
-                          //               );
-                          //             },
-                          //         ),
-                          //       ],
-                          //     ),
-                          //   ),
-                          // ),
-                          const SizedBox(height: 30), // Added space here
+                          const SizedBox(height: 30),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 16.0),
                             child: Row(
@@ -317,23 +206,26 @@ class _LoginPageState extends State<LoginPage> {
                                         .setLocale(const Locale('en'));
                                     setState(() {
                                       isEnglishSelected = true;
+                                      _resetValidationErrors();
                                     });
                                   },
                                   child: Text(
                                     'English',
                                     style: AppTextStyles.labelStyle.copyWith(
-                                        color: isEnglishSelected
-                                            ? AppColors.primaryColor
-                                            : AppColors.textDarkColor,
-                                        fontSize: 12),
+                                      color: isEnglishSelected
+                                          ? AppColors.primaryColor
+                                          : AppColors.textDarkColor,
+                                      fontSize: 12,
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(width: 8),
                                 Text(
                                   "|",
                                   style: AppTextStyles.labelStyle.copyWith(
-                                      color: AppColors.textDarkColor,
-                                      fontWeight: FontWeight.normal),
+                                    color: AppColors.textDarkColor,
+                                    fontWeight: FontWeight.normal,
+                                  ),
                                 ),
                                 const SizedBox(width: 8),
                                 InkWell(
@@ -343,15 +235,17 @@ class _LoginPageState extends State<LoginPage> {
                                         .setLocale(const Locale('ta'));
                                     setState(() {
                                       isEnglishSelected = false;
+                                      _resetValidationErrors();
                                     });
                                   },
                                   child: Text(
                                     'தமிழ்',
                                     style: AppTextStyles.labelStyle.copyWith(
-                                        color: !isEnglishSelected
-                                            ? AppColors.primaryColor
-                                            : AppColors.textDarkColor,
-                                        fontSize: 12),
+                                      color: !isEnglishSelected
+                                          ? AppColors.primaryColor
+                                          : AppColors.textDarkColor,
+                                      fontSize: 12,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -361,8 +255,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 20.0),
+                  Center(
                     child: RichText(
                       text: TextSpan(
                         children: [
@@ -371,7 +264,7 @@ class _LoginPageState extends State<LoginPage> {
                             style: AppTextStyles.labelStyle,
                           ),
                           TextSpan(
-                            text: S.of(context).signUp,
+                            text: ' ${S.of(context).signUp}',
                             style: AppTextStyles.labelStyle.copyWith(
                               color: AppColors.primaryColor,
                             ),
@@ -389,6 +282,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),
