@@ -156,7 +156,7 @@ class _SignupPageState extends State<SignupPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(S.of(context).yourName,
-                            style: AppTextStyles.titleStyle),
+                            style: AppTextStyles.labelStyle),
                         const SizedBox(height: 8),
                         TextFormField(
                             controller: _nameController,
@@ -187,7 +187,7 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                         const SizedBox(height: 10),
                         Text(S.of(context).mobileNo,
-                            style: AppTextStyles.titleStyle),
+                            style: AppTextStyles.labelStyle),
                         const SizedBox(height: 8),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -283,7 +283,7 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                         const SizedBox(height: 10),
                         Text(S.of(context).email,
-                            style: AppTextStyles.titleStyle),
+                            style: AppTextStyles.labelStyle),
                         const SizedBox(height: 8),
                         TextFormField(
                             controller: _emailController,
@@ -312,7 +312,7 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                         const SizedBox(height: 10),
                         Text(S.of(context).password,
-                            style: AppTextStyles.titleStyle),
+                            style: AppTextStyles.labelStyle),
                         const SizedBox(height: 8),
                         TextFormField(
                           controller: _passwordController,
@@ -356,7 +356,7 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                         const SizedBox(height: 10),
                         Text(S.of(context).confirmPassword,
-                            style: AppTextStyles.titleStyle),
+                            style: AppTextStyles.labelStyle),
                         const SizedBox(height: 8),
                         TextFormField(
                           controller: _confirmPasswordController,
@@ -368,8 +368,8 @@ class _SignupPageState extends State<SignupPage> {
                                 : AppColors.hintTextColor,
                           ).copyWith(
                             suffixIcon: IconButton(
-                              color: AppColors.hintTextColor,
                               icon: Icon(
+                                color: AppColors.hintTextColor,
                                 _confirmPasswordVisible
                                     ? Icons.visibility
                                     : Icons.visibility_off,
@@ -417,36 +417,37 @@ class _SignupPageState extends State<SignupPage> {
                             style: AppButtonStyles.elevatedButtonStyle,
                           ),
                         ),
-                        const SizedBox(height: 40),
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: RichText(
-                              text: TextSpan(
-                                text: S.of(context).alreadyHaveAnAccount,
-                                style: AppTextStyles.defaultStyle
-                                    .copyWith(fontWeight: FontWeight.w600),
-                                children: [
-                                  TextSpan(
-                                    text: S.of(context).login,
-                                    style: AppTextStyles.defaultStyle.copyWith(
-                                      color: AppButtonStyles
-                                          .elevatedButtonStyle.backgroundColor
-                                          ?.resolve({}),
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        Navigator.pop(context);
-                                      },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+                        const SizedBox(height: 10),
                       ],
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: S.of(context).alreadyHaveAnAccount + ' ',
+                            style: AppTextStyles.labelStyle,
+                          ),
+                          TextSpan(
+                            text: S.of(context).signIn,
+                            style: AppTextStyles.labelStyle.copyWith(
+                              color: AppColors.primaryColor,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                // Handle tap here
+                                Navigator.pop(context);
+                              },
+                          ),
+                        ],
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),

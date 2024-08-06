@@ -11,7 +11,7 @@ class AppTextStyles {
 
   static const TextStyle navbarStyle = TextStyle(
     color: AppColors.primaryColor,
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: FontWeight.w600,
     fontFamily: 'Poppins',
   );
@@ -22,10 +22,16 @@ class AppTextStyles {
     fontFamily: 'Poppins',
   );
 
-  static const TextStyle titleStyle = TextStyle(
-    fontSize: 16,
+  static const TextStyle labelStyle = TextStyle(
     color: AppColors.textDarkColor,
+    fontSize: 16,
     fontWeight: FontWeight.w600,
+    fontFamily: 'Poppins',
+  );
+
+  static const TextStyle titleStyle = TextStyle(
+    fontSize: 14,
+    color: AppColors.textDarkColor,
     fontFamily: 'Poppins',
   );
 
@@ -80,7 +86,7 @@ class AppInputDecorations {
 class AppButtonStyles {
   static ButtonStyle elevatedButtonStyle = ElevatedButton.styleFrom(
     backgroundColor: AppColors.primaryColor,
-    padding: const EdgeInsets.symmetric(vertical: 15),
+    padding: const EdgeInsets.symmetric(vertical: 13),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(20),
     ),
