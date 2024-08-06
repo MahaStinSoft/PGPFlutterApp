@@ -65,7 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "myGrievance": MessageLookupByLibrary.simpleMessage("My Grievance"),
         "newGrievance": MessageLookupByLibrary.simpleMessage("New Grievance"),
         "noGrievanceToShow":
-            MessageLookupByLibrary.simpleMessage("NO grievance to show"),
+            MessageLookupByLibrary.simpleMessage("No Grievance to Show"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordHint":
             MessageLookupByLibrary.simpleMessage("Enter your password"),

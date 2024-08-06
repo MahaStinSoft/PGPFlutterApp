@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutterapp/colors.dart';
 import 'package:flutterapp/styles.dart'; // Adjust according to your path
 import 'package:flutterapp/generated/l10n.dart';
@@ -6,7 +7,28 @@ import 'package:flutterapp/generated/l10n.dart';
 class GrievancePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Ensure status bar settings are applied
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, // Transparent status bar
+      statusBarIconBrightness:
+          Brightness.dark, // Dark icons for light status bar
+    ));
+
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: Text(S.of(context).myGrievance),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        titleTextStyle: AppTextStyles.headerStyle,
+        toolbarHeight: kToolbarHeight,
+        iconTheme: IconThemeData(
+          color: AppColors.textDarkColor, // Set icon color to green
+          size: 30.0,
+        ),
+        systemOverlayStyle:
+            SystemUiOverlayStyle.dark, // Ensure black status bar content
+      ),
       body: Stack(
         children: [
           Positioned(
@@ -19,35 +41,19 @@ class GrievancePage extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          Positioned(
-            top: 10,
-            left: 0,
-            right: 0,
-            child: AppBar(
-              title: Text(S.of(context).myGrievance),
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              titleTextStyle: AppTextStyles.headerStyle,
-              toolbarHeight: kToolbarHeight,
-              iconTheme: IconThemeData(
-                color: AppColors.textDarkColor,
-                size: 30.0,
-              ),
-            ),
-          ),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 20.0),
                 Text(
                   S.of(context).noGrievanceToShow,
                   style: AppTextStyles.defaultStyle.copyWith(
                     fontSize: 20.0,
+                    fontWeight: FontWeight.w600,
                     color: AppColors.hintTextColor,
                   ),
                 ),
-                SizedBox(width: 10.0), // Space between text and icon
+                SizedBox(height: 10.0), // Space between text and icon
                 Icon(
                   Icons.do_not_disturb, // Replace with desired icon
                   color: AppColors.hintTextColor,

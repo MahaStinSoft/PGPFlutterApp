@@ -24,7 +24,7 @@ class _GrievanceFormScreenState extends State<GrievanceFormScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          S.of(context).myGrievance,
+          S.of(context).grievanceFormTitle,
           style: AppTextStyles.headerStyle,
         ),
         leading: IconButton(
@@ -162,7 +162,8 @@ class _GrievanceFormScreenState extends State<GrievanceFormScreen> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 10.0),
                   child: SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -251,6 +252,12 @@ class _GrievanceFormScreenState extends State<GrievanceFormScreen> {
                       hint,
                       style: TextStyle(color: AppColors.hintTextColor),
                     ),
+                  ),
+                  icon: Icon(
+                    Icons.arrow_drop_down,
+                    color: AppColors
+                        .hintTextColor, // Change the color of the dropdown icon
+                    size: 30.0, // Change the size of the dropdown icon
                   ),
                 ),
               ),

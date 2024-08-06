@@ -56,7 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("நகராட்சி தகவல்கள்"),
         "login": MessageLookupByLibrary.simpleMessage("உள்நுழைய"),
         "loginGrievance": MessageLookupByLibrary.simpleMessage(
-            "உங்கள் முறையீட்டை பகிர்ந்து கொள்ள உள்நுழையவும்!"),
+            "உங்கள் புகாரைப் பகிர்வதற்காக உள்நுழையவும்!"),
         "mobileNo": MessageLookupByLibrary.simpleMessage("மொபைல் எண்"),
         "mobileNoHint": MessageLookupByLibrary.simpleMessage(
             "உங்கள் மொபைல் எண்ணை உள்ளிடவும்"),

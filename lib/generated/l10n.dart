@@ -450,10 +450,10 @@ class S {
     );
   }
 
-  /// `NO grievance to show`
+  /// `No Grievance to Show`
   String get noGrievanceToShow {
     return Intl.message(
-      'NO grievance to show',
+      'No Grievance to Show',
       name: 'noGrievanceToShow',
       desc: '',
       args: [],
