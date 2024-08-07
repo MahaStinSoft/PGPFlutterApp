@@ -38,7 +38,7 @@ class GrievancePage extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.4,
             child: Image.asset(
               'assets/vector.png',
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
             ),
           ),
           Center(
@@ -52,6 +52,7 @@ class GrievancePage extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     color: AppColors.hintTextColor,
                   ),
+                  textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 10.0), // Space between text and icon
                 Icon(

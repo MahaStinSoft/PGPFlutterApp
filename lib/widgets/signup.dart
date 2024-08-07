@@ -353,6 +353,7 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                       ],
                     ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 const SizedBox(height: 20),
