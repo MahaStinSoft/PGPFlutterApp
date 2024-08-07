@@ -27,6 +27,12 @@ class _LoginPageState extends State<LoginPage> {
   String? _passwordErrorText;
 
   @override
+  void initState() {
+    super.initState();
+    _resetValidationErrors();
+  }
+
+  @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
@@ -275,7 +281,9 @@ class _LoginPageState extends State<LoginPage> {
                                   MaterialPageRoute(
                                     builder: (context) => SignupPage(),
                                   ),
-                                );
+                                ).then((value) {
+                                  _resetValidationErrors();
+                                });
                               },
                           ),
                         ],
