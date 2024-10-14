@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/LocaleProvider%20.dart';
+import 'package:flutterapp/app_two/login.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutterapp/widgets/login.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
               GlobalCupertinoLocalizations.delegate,
             ],
             debugShowCheckedModeBanner: false,
-            home: LoginPage(), // or your initial page
+            home: LoginPageTwo(), // or your initial page
           );
         },
       ),

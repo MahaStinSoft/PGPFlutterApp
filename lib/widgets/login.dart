@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
+import 'package:flutterapp/home_widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:flutterapp/LocaleProvider%20.dart'; // Adjust import as necessary
 import 'package:flutterapp/colors.dart';
@@ -64,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => HomePage(),
+          builder: (context) => DownloadExample(),
         ),
       );
     }
