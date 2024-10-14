@@ -5,8 +5,11 @@ import 'package:flutterapp/styles.dart';
 import 'package:flutterapp/widgets/GrievanceButton.dart';
 import 'package:flutterapp/widgets/GrievanceCounter.dart';
 import 'package:flutterapp/generated/l10n.dart';
+import 'package:flutterapp/widgets/common/AlertBox.dart';
 import 'package:flutterapp/widgets/grievanceFrom.dart';
+import 'package:flutterapp/widgets/login.dart';
 import 'package:flutterapp/widgets/myGrievance.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -24,6 +27,33 @@ class _HomePageState extends State<HomePage> {
         statusBarBrightness: Brightness.light,
       ),
     );
+  }
+
+  void _showLogoutConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return LogoutConfirmationDialog(
+          onLogout: () async {
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            await prefs.setBool('isLoggedIn', false); // Clear the login status
+
+            // Navigate to the Login Page after logout
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => LoginPage(),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+// Call this method when the user initiates logout
+  void _logout() {
+    _showLogoutConfirmationDialog(context); // Show confirmation dialog
   }
 
   @override
@@ -50,6 +80,27 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(right: 20),
+                          child: InkWell(
+                            onTap: () {
+                              _logout();
+                            },
+                            child: Text(
+                              'Logout',
+                              style: AppTextStyles.defaultStyle.copyWith(
+                                color: Color.fromARGB(255, 232, 184, 112),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                     SizedBox(height: screenHeight * 0.1),
                     Center(
                       child: Text(
@@ -133,18 +184,14 @@ class _HomePageState extends State<HomePage> {
                             icon: Icons.photo,
                             label: S.of(context).gallery,
                             color: Colors.yellow,
-                            onPressed: () {
-                              // Handle navigation or action here
-                            },
+                            onPressed: () {},
                           ),
                           SizedBox(height: screenHeight * 0.0),
                           GrievanceButton(
                             icon: Icons.video_library,
                             label: S.of(context).videos,
                             color: AppColors.primaryColor,
-                            onPressed: () {
-                              // Handle navigation or action here
-                            },
+                            onPressed: () {},
                           ),
                         ],
                       ),

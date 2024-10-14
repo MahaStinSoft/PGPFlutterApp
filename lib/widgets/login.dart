@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
-import 'package:flutterapp/home_widgets.dart';
+import 'package:flutterapp/app_two/middleware/backend_helper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutterapp/widgets/common/AlertBox.dart';
 import 'package:provider/provider.dart';
-import 'package:flutterapp/LocaleProvider%20.dart'; // Adjust import as necessary
+import 'package:flutterapp/LocaleProvider%20.dart';
 import 'package:flutterapp/colors.dart';
 import 'package:flutterapp/styles.dart';
 import 'package:flutterapp/widgets/common/custom_textformfield.dart';
@@ -26,6 +28,7 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordController = TextEditingController();
   String? _emailErrorText;
   String? _passwordErrorText;
+  final BackendHelper backendHelper = BackendHelper();
 
   @override
   void initState() {
@@ -57,17 +60,41 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  void _submit() {
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return ErrorDialog(message: message);
+      },
+    );
+  }
+
+  void _submit() async {
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
     _validateFields();
 
     if (_emailErrorText == null && _passwordErrorText == null) {
-      // Proceed with login logic if no validation errors
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => DownloadExample(),
-        ),
-      );
+      try {
+        // Use await instead of then
+        bool isSuccess = await backendHelper.login(email, password);
+        if (isSuccess) {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setBool('isLoggedIn', true); // Save the logged-in status
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomePage(),
+            ),
+          );
+        } else {
+          _showErrorDialog(S.of(context).invalidCredentials);
+        }
+      } catch (error) {
+        _showErrorDialog(S.of(context).loginError);
+        print('Login error: $error');
+      }
     }
   }
 

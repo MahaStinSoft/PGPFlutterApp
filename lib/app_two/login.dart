@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutterapp/app_two/middleware/api_helper.dart';
+import 'package:flutterapp/app_two/middleware/backend_helper.dart';
 
-class LoginPageTwo extends StatelessWidget {
+class LoginPageTwo extends StatefulWidget {
+  @override
+  _LoginPageTwoState createState() => _LoginPageTwoState();
+}
+
+class _LoginPageTwoState extends State<LoginPageTwo> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final BackendHelper backendHelper =
+      BackendHelper(); // Create an instance of BackendHelper
 
   void handleLogin() {
     String email = emailController.text;
     String password = passwordController.text;
-    login(email, password);
+
+    // Call the login method from the BackendHelper
+    backendHelper.login(email, password).then((_) {
+      // Handle successful login, e.g., navigate to another page
+    }).catchError((error) {
+      // Handle login error
+      print('Login error: $error');
+    });
   }
 
   @override
@@ -16,7 +30,7 @@ class LoginPageTwo extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Login')),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0),
         child: Column(
           children: [
             TextField(
@@ -37,5 +51,12 @@ class LoginPageTwo extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }

@@ -18,7 +18,7 @@ class AppTextStyles {
 
   static const TextStyle defaultStyle = TextStyle(
     color: AppColors.textDarkColor,
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: 'Poppins',
   );
 

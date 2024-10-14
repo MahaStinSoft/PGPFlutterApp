@@ -54,9 +54,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "grievanceLocation":
             MessageLookupByLibrary.simpleMessage("பிரச்சினை இடம்"),
         "grievanceType": MessageLookupByLibrary.simpleMessage("பிரச்சினை வகை"),
+        "invalidCredentials": MessageLookupByLibrary.simpleMessage(
+            "தவறான அடையாளங்கள். தயவுசெய்து மீண்டும் முயற்சிக்கவும்."),
         "knowYourMunicipality":
             MessageLookupByLibrary.simpleMessage("நகராட்சி தகவல்கள்"),
         "login": MessageLookupByLibrary.simpleMessage("உள்நுழைய"),
+        "loginError": MessageLookupByLibrary.simpleMessage(
+            "உள்ளீட்டு செயலின் போது ஒரு தவறு ஏற்பட்டது. தயவுசெய்து மீண்டும் முயற்சிக்கவும்."),
         "loginGrievance": MessageLookupByLibrary.simpleMessage(
             "உங்கள் புகாரைப் பகிர்வதற்காக உள்நுழையவும்!"),
         "mobileNo": MessageLookupByLibrary.simpleMessage("மொபைல் எண்"),

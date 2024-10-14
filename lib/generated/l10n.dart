@@ -749,6 +749,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Invalid credentials. Please try again.`
+  String get invalidCredentials {
+    return Intl.message(
+      'Invalid credentials. Please try again.',
+      name: 'invalidCredentials',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An error occurred during login. Please try again.`
+  String get loginError {
+    return Intl.message(
+      'An error occurred during login. Please try again.',
+      name: 'loginError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -54,9 +54,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "grievanceLocation":
             MessageLookupByLibrary.simpleMessage("Grievance Location"),
         "grievanceType": MessageLookupByLibrary.simpleMessage("Grievance Type"),
+        "invalidCredentials": MessageLookupByLibrary.simpleMessage(
+            "Invalid credentials. Please try again."),
         "knowYourMunicipality":
             MessageLookupByLibrary.simpleMessage("Know your Municipality"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "loginError": MessageLookupByLibrary.simpleMessage(
+            "An error occurred during login. Please try again."),
         "loginGrievance": MessageLookupByLibrary.simpleMessage(
             "Login to share your grievance!"),
         "mobileNo": MessageLookupByLibrary.simpleMessage("Mobile No"),
