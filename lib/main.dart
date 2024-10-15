@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/LocaleProvider%20.dart';
-import 'package:flutterapp/app_two/login.dart';
 import 'package:flutterapp/widgets/home.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutterapp/widgets/login.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutterapp/generated/l10n.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+
+  runApp(MyApp(isLoggedIn: isLoggedIn));
 }
 
 class MyApp extends StatelessWidget {
+  final bool isLoggedIn;
+
+  MyApp({required this.isLoggedIn});
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -29,7 +36,7 @@ class MyApp extends StatelessWidget {
               GlobalCupertinoLocalizations.delegate,
             ],
             debugShowCheckedModeBanner: false,
-            home: HomePage(), // or your initial page
+            home: isLoggedIn ? HomePage() : LoginPage(),
           );
         },
       ),
