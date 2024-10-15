@@ -12,28 +12,53 @@ class BackendHelper {
 
     try {
       final response = await _apiHelper.post(UrlHelper.getLoginUrl(), data);
-      String token = response['token'];
-      String userId = response['userId'];
-      _apiHelper.setToken(token);
-      print('Login successful: $token');
-      return true;
+
+      if (response['data'] != null &&
+          response['data']['token'] != null &&
+          response['data']['userId'] != null) {
+        String token = response['data']['token'];
+        String userId = response['data']['userId'];
+        _apiHelper.setToken(token);
+        print('Login successful: $token');
+        return true;
+      } else {
+        print('Login failed: Invalid response structure - $response');
+        return false;
+      }
     } catch (error) {
       print('Login failed: $error');
       return false;
     }
   }
 
-  Future<void> register(String email, String password, String name) async {
+  Future<bool> register(
+    String email,
+    String password,
+    String name,
+    String mobile,
+    String confirmPassword,
+  ) async {
     final data = {
       'email': email,
       'password': password,
+      'confirmPassword': confirmPassword,
       'name': name,
+      'mobile': mobile,
     };
+
     try {
       final response = await _apiHelper.post(UrlHelper.getRegisterUrl(), data);
-      print('Registration successful: ${response['message']}');
+
+      if (response['statusCode'] == 201) {
+        print('Registration successful: ${response['data']['message']}');
+        return true;
+      } else {
+        print('Registration failed: ${response['data']['message']}');
+        return false;
+      }
     } catch (error) {
       print('Registration failed: $error');
+      return false;
     }
   }
 }

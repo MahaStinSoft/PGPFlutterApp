@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/LocaleProvider%20.dart';
-import 'package:flutterapp/widgets/home.dart';
-import 'package:flutterapp/widgets/login.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutterapp/generated/l10n.dart';
+import 'package:flutterapp/widgets/routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 
@@ -36,7 +35,8 @@ class MyApp extends StatelessWidget {
               GlobalCupertinoLocalizations.delegate,
             ],
             debugShowCheckedModeBanner: false,
-            home: isLoggedIn ? HomePage() : LoginPage(),
+            initialRoute: isLoggedIn ? Routes.home : Routes.login,
+            onGenerateRoute: Routes.generateRoute,
           );
         },
       ),

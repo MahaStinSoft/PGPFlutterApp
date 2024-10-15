@@ -2,10 +2,14 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
 exports.register = async (req, res) => {
-  const { email, password } = req.body;
+  const { name, email, mobile, password, confirmPassword } = req.body;
+
+  if (password !== confirmPassword) {
+    return res.status(400).json({ message: 'Passwords do not match' });
+  }
 
   try {
-    const user = new User({ email, password });
+    const user = new User({ name, email, mobile, password });
     await user.save();
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
@@ -40,6 +44,16 @@ exports.login = async (req, res) => {
     });
   } catch (error) {
     console.error('Error logging in:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+exports.getUsers = async (req, res) => {
+  try {
+    const users = await User.find({}, { password: 0 }); // Exclude the password field
+    res.json(users);
+  } catch (error) {
+    console.error('Error fetching users:', error);
     res.status(500).json({ message: 'Server error' });
   }
 };

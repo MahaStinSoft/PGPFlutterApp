@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
+import 'package:flutterapp/app_two/middleware/backend_helper.dart';
 import 'package:flutterapp/colors.dart';
 import 'package:flutterapp/styles.dart';
 import 'package:flutterapp/generated/l10n.dart';
+import 'package:flutterapp/widgets/common/AlertBox.dart';
 import 'package:flutterapp/widgets/common/custom_textformfield.dart';
 
 class SignupPage extends StatefulWidget {
@@ -30,6 +32,7 @@ class _SignupPageState extends State<SignupPage> {
 
   bool _passwordVisible = false;
   bool _confirmPasswordVisible = false;
+  final BackendHelper backendHelper = BackendHelper();
 
   void _validateField(String field) {
     setState(() {
@@ -104,6 +107,54 @@ class _SignupPageState extends State<SignupPage> {
       return S.of(context).passwordsDoNotMatch;
     }
     return null;
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return ErrorDialog(message: message);
+      },
+    );
+  }
+
+  Future<void> _submitForm() async {
+    setState(() {
+      _nameError = _validateName(_nameController.text);
+      _phoneError = _validateMobile(_mobileController.text);
+      _emailError = _validateEmail(_emailController.text);
+      _passwordError = _validatePassword(_passwordController.text);
+      _confirmPasswordError = _validateConfirmPassword(
+        _confirmPasswordController.text,
+        _passwordController.text,
+      );
+    });
+
+    if (_nameError == null &&
+        _phoneError == null &&
+        _emailError == null &&
+        _passwordError == null &&
+        _confirmPasswordError == null) {
+      try {
+        final isSuccess = await backendHelper.register(
+          _emailController.text,
+          _passwordController.text,
+          _nameController.text,
+          _mobileController.text,
+          _confirmPasswordController.text,
+        );
+        if (isSuccess) {
+          Navigator.pushReplacementNamed(context, '/home');
+        } else {
+          _showErrorDialog(
+              'Registration failed. Please try again.'); // Handle failed registration
+        }
+      } catch (error) {
+        _showErrorDialog(
+            'An error occurred. Please try again.'); // Show error dialog on exception
+        print('Registration error: $error'); // Print error for debugging
+      }
+    }
   }
 
   @override
@@ -363,28 +414,5 @@ class _SignupPageState extends State<SignupPage> {
         ],
       ),
     );
-  }
-
-  void _submitForm() {
-    setState(() {
-      _nameError = _validateName(_nameController.text);
-      _phoneError = _validateMobile(_mobileController.text);
-      _emailError = _validateEmail(_emailController.text);
-      _passwordError = _validatePassword(_passwordController.text);
-      _confirmPasswordError = _validateConfirmPassword(
-        _confirmPasswordController.text,
-        _passwordController.text,
-      );
-    });
-
-    if (_nameError == null &&
-        _phoneError == null &&
-        _emailError == null &&
-        _passwordError == null &&
-        _confirmPasswordError == null) {
-      // Proceed with sign-up process
-      // Example: Navigator.pushNamed(context, '/home');
-      print('Form Submitted');
-    }
   }
 }
