@@ -35,6 +35,12 @@ class AppTextStyles {
     fontFamily: 'Poppins',
   );
 
+  static const TextStyle secondaryTitleStyle = TextStyle(
+    fontSize: 12,
+    color: AppColors.iconsColor,
+    fontFamily: 'Poppins',
+  );
+
   static const TextStyle textInputStyle = TextStyle(
     fontFamily: 'Poppins',
   );
